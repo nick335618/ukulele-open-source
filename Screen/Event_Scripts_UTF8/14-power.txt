@@ -1,0 +1,323 @@
+Page 14 — power（电源与休眠设置）；320×240。
+
+【后初始化事件】
+tm0.en=1
+vis t_tmp,0
+vpop=0
+vpextra=0
+vpowerseq=vpowerseq+1
+if(vpowerseq>65535)
+{
+  vpowerseq=0
+}
+vpseqlo=vpowerseq%256
+vpseqhi=vpowerseq/256
+vpcrc=28
+vpcrc=vpcrc^5
+vpcrc=vpcrc^1
+vpcrc=vpcrc^vpop
+vpcrc=vpcrc^vpseqlo
+vpcrc=vpcrc^vpseqhi
+vpcrc=vpcrc^vpextra
+printh AA 1C 05 01
+prints vpop,1
+prints vpseqlo,1
+prints vpseqhi,1
+prints vpextra,1
+prints vpcrc,1
+
+【定时器 tm0 事件；tim=150,en=1】
+t_state.txt="工作中"
+if(vpowercap==0)
+{
+  t_state.txt="休眠功能等待固件确认"
+}
+if(vpowerstate==1)
+{
+  t_state.txt="工作中，屏幕已降亮"
+}
+if(vpowerstate==2)
+{
+  t_state.txt="即将休眠，可继续使用"
+}
+if(vpowerstate==3)
+{
+  t_state.txt="正在休眠"
+}
+if(vpowerstate==4)
+{
+  t_state.txt="设备已休眠"
+}
+if(vpowerstate==5)
+{
+  t_state.txt="正在唤醒"
+}
+if(vpowerstate==6)
+{
+  t_state.txt="恢复失败，可重试唤醒"
+}
+t_auto.txt="自动休眠：关闭"
+if(vsleepmin>0)
+{
+  covx vsleepmin,t_tmp.txt,0,0
+  t_auto.txt="自动休眠："+t_tmp.txt+"分钟"
+}
+b_3.bco=22979
+b_3.pco=65535
+b_5.bco=22979
+b_5.pco=65535
+b_10.bco=22979
+b_10.pco=65535
+b_15.bco=22979
+b_15.pco=65535
+b_30.bco=22979
+b_30.pco=65535
+b_off.bco=22979
+b_off.pco=65535
+if(vsleepmin==3)
+{
+  b_3.bco=56784
+  b_3.pco=0
+}
+if(vsleepmin==5)
+{
+  b_5.bco=56784
+  b_5.pco=0
+}
+if(vsleepmin==10)
+{
+  b_10.bco=56784
+  b_10.pco=0
+}
+if(vsleepmin==15)
+{
+  b_15.bco=56784
+  b_15.pco=0
+}
+if(vsleepmin==30)
+{
+  b_30.bco=56784
+  b_30.pco=0
+}
+if(vsleepmin==0)
+{
+  b_off.bco=56784
+  b_off.pco=0
+}
+
+t_result.txt=""
+if(vpowerresult==1)
+{
+  t_result.txt="等待实际状态确认"
+}
+if(vpowerresult==3)
+{
+  t_result.txt="操作失败或固件不支持"
+}
+if(vpowerresult==4)
+{
+  t_result.txt="操作超时，请重试"
+}
+if(vpowerresult==5)
+{
+  t_result.txt="FPGA离线"
+}
+if(vpowerresult==6)
+{
+  t_result.txt="设备忙，请稍后重试"
+}
+
+【按钮 b_sleep 弹起事件】
+vpop=1
+vpextra=0
+vpowerseq=vpowerseq+1
+if(vpowerseq>65535)
+{
+  vpowerseq=0
+}
+vpseqlo=vpowerseq%256
+vpseqhi=vpowerseq/256
+vpcrc=28
+vpcrc=vpcrc^5
+vpcrc=vpcrc^1
+vpcrc=vpcrc^vpop
+vpcrc=vpcrc^vpseqlo
+vpcrc=vpcrc^vpseqhi
+vpcrc=vpcrc^vpextra
+printh AA 1C 05 01
+prints vpop,1
+prints vpseqlo,1
+prints vpseqhi,1
+prints vpextra,1
+prints vpcrc,1
+
+【按钮 b_wake 弹起事件】
+vpop=2
+vpextra=0
+vpowerseq=vpowerseq+1
+if(vpowerseq>65535)
+{
+  vpowerseq=0
+}
+vpseqlo=vpowerseq%256
+vpseqhi=vpowerseq/256
+vpcrc=28
+vpcrc=vpcrc^5
+vpcrc=vpcrc^1
+vpcrc=vpcrc^vpop
+vpcrc=vpcrc^vpseqlo
+vpcrc=vpcrc^vpseqhi
+vpcrc=vpcrc^vpextra
+printh AA 1C 05 01
+prints vpop,1
+prints vpseqlo,1
+prints vpseqhi,1
+prints vpextra,1
+prints vpcrc,1
+
+【按钮 b_3 弹起事件】
+vpop=4
+vpextra=3
+vpowerseq=vpowerseq+1
+if(vpowerseq>65535)
+{
+  vpowerseq=0
+}
+vpseqlo=vpowerseq%256
+vpseqhi=vpowerseq/256
+vpcrc=28
+vpcrc=vpcrc^5
+vpcrc=vpcrc^1
+vpcrc=vpcrc^vpop
+vpcrc=vpcrc^vpseqlo
+vpcrc=vpcrc^vpseqhi
+vpcrc=vpcrc^vpextra
+printh AA 1C 05 01
+prints vpop,1
+prints vpseqlo,1
+prints vpseqhi,1
+prints vpextra,1
+prints vpcrc,1
+
+【按钮 b_5 弹起事件】
+vpop=4
+vpextra=5
+vpowerseq=vpowerseq+1
+if(vpowerseq>65535)
+{
+  vpowerseq=0
+}
+vpseqlo=vpowerseq%256
+vpseqhi=vpowerseq/256
+vpcrc=28
+vpcrc=vpcrc^5
+vpcrc=vpcrc^1
+vpcrc=vpcrc^vpop
+vpcrc=vpcrc^vpseqlo
+vpcrc=vpcrc^vpseqhi
+vpcrc=vpcrc^vpextra
+printh AA 1C 05 01
+prints vpop,1
+prints vpseqlo,1
+prints vpseqhi,1
+prints vpextra,1
+prints vpcrc,1
+
+【按钮 b_10 弹起事件】
+vpop=4
+vpextra=10
+vpowerseq=vpowerseq+1
+if(vpowerseq>65535)
+{
+  vpowerseq=0
+}
+vpseqlo=vpowerseq%256
+vpseqhi=vpowerseq/256
+vpcrc=28
+vpcrc=vpcrc^5
+vpcrc=vpcrc^1
+vpcrc=vpcrc^vpop
+vpcrc=vpcrc^vpseqlo
+vpcrc=vpcrc^vpseqhi
+vpcrc=vpcrc^vpextra
+printh AA 1C 05 01
+prints vpop,1
+prints vpseqlo,1
+prints vpseqhi,1
+prints vpextra,1
+prints vpcrc,1
+
+【按钮 b_15 弹起事件】
+vpop=4
+vpextra=15
+vpowerseq=vpowerseq+1
+if(vpowerseq>65535)
+{
+  vpowerseq=0
+}
+vpseqlo=vpowerseq%256
+vpseqhi=vpowerseq/256
+vpcrc=28
+vpcrc=vpcrc^5
+vpcrc=vpcrc^1
+vpcrc=vpcrc^vpop
+vpcrc=vpcrc^vpseqlo
+vpcrc=vpcrc^vpseqhi
+vpcrc=vpcrc^vpextra
+printh AA 1C 05 01
+prints vpop,1
+prints vpseqlo,1
+prints vpseqhi,1
+prints vpextra,1
+prints vpcrc,1
+
+【按钮 b_30 弹起事件】
+vpop=4
+vpextra=30
+vpowerseq=vpowerseq+1
+if(vpowerseq>65535)
+{
+  vpowerseq=0
+}
+vpseqlo=vpowerseq%256
+vpseqhi=vpowerseq/256
+vpcrc=28
+vpcrc=vpcrc^5
+vpcrc=vpcrc^1
+vpcrc=vpcrc^vpop
+vpcrc=vpcrc^vpseqlo
+vpcrc=vpcrc^vpseqhi
+vpcrc=vpcrc^vpextra
+printh AA 1C 05 01
+prints vpop,1
+prints vpseqlo,1
+prints vpseqhi,1
+prints vpextra,1
+prints vpcrc,1
+
+【按钮 b_off 弹起事件】
+vpop=4
+vpextra=0
+vpowerseq=vpowerseq+1
+if(vpowerseq>65535)
+{
+  vpowerseq=0
+}
+vpseqlo=vpowerseq%256
+vpseqhi=vpowerseq/256
+vpcrc=28
+vpcrc=vpcrc^5
+vpcrc=vpcrc^1
+vpcrc=vpcrc^vpop
+vpcrc=vpcrc^vpseqlo
+vpcrc=vpcrc^vpseqhi
+vpcrc=vpcrc^vpextra
+printh AA 1C 05 01
+prints vpop,1
+prints vpseqlo,1
+prints vpseqhi,1
+prints vpextra,1
+prints vpcrc,1
+
+【按钮 b_back 弹起事件】
+page main

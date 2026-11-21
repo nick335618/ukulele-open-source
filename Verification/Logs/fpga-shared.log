@@ -1,0 +1,211 @@
+*** GOWIN Tcl Command Line Console  *** 
+Open project D:/ukulele_handoff/debug/2026-11-13-playback/FPGA/modal60/gv_host.gprj finished
+GowinSynthesis start
+Running parser ...
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_i2c.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_spi.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\spi_master.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\spi_slave_bytes.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\la_capture.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ads7950_spi.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\capo_pitch.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_fx.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\power_control.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\performance_router.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\opto_velocity.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\strum_detect.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\sensor_reg_if.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v'
+Analyzing included file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":6)
+WARN  (EX3209) : Root scope declaration is not allowed in Verilog 2001 mode("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh":90)
+WARN  (EX3209) : Root scope declaration is not allowed in Verilog 2001 mode("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh":170)
+WARN  (EX3209) : Root scope declaration is not allowed in Verilog 2001 mode("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh":250)
+WARN  (EX3209) : Root scope declaration is not allowed in Verilog 2001 mode("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh":330)
+WARN  (EX3209) : Root scope declaration is not allowed in Verilog 2001 mode("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh":334)
+WARN  (EX3209) : Root scope declaration is not allowed in Verilog 2001 mode("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh":339)
+WARN  (EX3209) : Root scope declaration is not allowed in Verilog 2001 mode("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh":444)
+WARN  (EX3209) : Root scope declaration is not allowed in Verilog 2001 mode("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh":549)
+WARN  (EX3209) : Root scope declaration is not allowed in Verilog 2001 mode("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh":654)
+WARN  (EX3209) : Root scope declaration is not allowed in Verilog 2001 mode("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh":759)
+WARN  (EX3209) : Root scope declaration is not allowed in Verilog 2001 mode("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh":764)
+WARN  (EX3209) : Root scope declaration is not allowed in Verilog 2001 mode("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh":769)
+Back to file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":6)
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\vibrato_shared.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\vibrato_detect.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_recog.v'
+Analyzing included file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_recog.v":26)
+Back to file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_recog.v'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_recog.v":26)
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ch_map_rom.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\uart_rx.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\uart_tx.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\telemetry_tx.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\cmd_decoder.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v'
+Analyzing included file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\modal_config.vh'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":5)
+Back to file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":5)
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\tone_rom.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\i2s_tx.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\limiter16.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\pitch_ctl.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\tick_gen.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_profile.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_matrix.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\envelope_store.v'
+Analyzing Verilog file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v'
+Analyzing included file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_tables.vh'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v":58)
+Back to file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v":58)
+Analyzing included file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\performance_defaults.vh'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v":60)
+Back to file 'D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v":60)
+Compiling module 'top_gv_host'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v":61)
+Extracting RAM for identifier 'wave_buf0'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v":2189)
+Extracting RAM for identifier 'wave_buf1'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v":2190)
+Compiling module 'ad7147_scan(N_CH=97)'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":7)
+Extracting RAM for identifier 'cdc_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":141)
+Compiling module 'sensor_reg_if(SENSOR_SPI=1,N_CHIPS=8)'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\sensor_reg_if.v":23)
+Compiling module 'ad7147_spi'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_spi.v":4)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 8("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":173)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 27("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":261)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 27("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":302)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 27("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":347)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 27("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":366)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 27("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":390)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 27("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":418)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 27("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":455)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 27("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ad7147_scan.v":487)
+Compiling module 'touch_recog(RUNTIME_CONFIG=1,CAPO_ENABLED=1,NCH=97,N_FRET=18,CDC_RAM=1,SAMPLE_MS=23,EXTERNAL_MAP=1)'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_recog.v":28)
+Extracting RAM for identifier 'state_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_recog.v":130)
+Extracting RAM for identifier 'snap_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_recog.v":423)
+WARN  (EX3791) : Expression size 17 truncated to fit in target size 16("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_recog.v":239)
+WARN  (EX3791) : Expression size 28 truncated to fit in target size 27("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_recog.v":256)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 4("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\touch_recog.v":315)
+Compiling module 'vibrato_detect(SHARED_CONTEXT=1,RUNTIME_CONFIG=1)'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\vibrato_detect.v":5)
+WARN  (EX3791) : Expression size 21 truncated to fit in target size 16("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\vibrato_detect.v":98)
+WARN  (EX3791) : Expression size 21 truncated to fit in target size 16("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\vibrato_detect.v":109)
+WARN  (EX3791) : Expression size 21 truncated to fit in target size 16("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\vibrato_detect.v":110)
+WARN  (EX3791) : Expression size 21 truncated to fit in target size 16("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\vibrato_detect.v":117)
+WARN  (EX3791) : Expression size 21 truncated to fit in target size 16("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\vibrato_detect.v":118)
+Compiling module 'led_matrix(CAPO_ENABLED=1,SPI_HZ=1000000)'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_matrix.v":28)
+WARN  (EX3791) : Expression size 8 truncated to fit in target size 7("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_matrix.v":194)
+Compiling module 'led_profile'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_profile.v":7)
+Extracting RAM for identifier 'mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_profile.v":24)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_profile.v":146)
+WARN  (EX3791) : Expression size 21 truncated to fit in target size 20("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_matrix.v":594)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 5("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_matrix.v":653)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 5("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_matrix.v":656)
+WARN  (EX3791) : Expression size 6 truncated to fit in target size 5("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_matrix.v":713)
+WARN  (EX3791) : Expression size 6 truncated to fit in target size 5("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_matrix.v":788)
+WARN  (EX3791) : Expression size 6 truncated to fit in target size 5("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\led_matrix.v":885)
+Compiling module 'tick_gen'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\tick_gen.v":10)
+WARN  (EX3791) : Expression size 11 truncated to fit in target size 10("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\tick_gen.v":31)
+Compiling module 'performance_router(TOUCH_GRACE=1)'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\performance_router.v":6)
+Extracting RAM for identifier 'records'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\performance_router.v":29)
+Extracting RAM for identifier 'stamps'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\performance_router.v":31)
+Extracting RAM for identifier 'waits'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\performance_router.v":32)
+Compiling module 'pitch_ctl(NV=12,GLIDE_MS=180)'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\pitch_ctl.v":26)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 6("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\pitch_ctl.v":200)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 6("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\pitch_ctl.v":201)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 6("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\pitch_ctl.v":202)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 6("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\pitch_ctl.v":203)
+Compiling module 'capo_pitch'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\capo_pitch.v":4)
+Compiling module 'additive4_tone'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":6)
+Extracting RAM for identifier 'inc_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":41)
+Extracting RAM for identifier 'rho_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":42)
+Extracting RAM for identifier 'a2_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":43)
+Extracting RAM for identifier 'g_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":44)
+Extracting RAM for identifier 'cos_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":45)
+Extracting RAM for identifier 'cos_step_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":46)
+Extracting RAM for identifier 'attack_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":51)
+Extracting RAM for identifier 'drive_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":52)
+Extracting RAM for identifier 's1_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":53)
+Extracting RAM for identifier 's2_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":54)
+WARN  (EX2526) : Entry size 28 at src/modal_mem/a2.hex:1 does not match memory width 25("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":58)
+WARN  (EX2526) : Entry size 28 at src/modal_mem/cos.hex:0 does not match memory width 25("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":60)
+WARN  (EX2526) : Entry size 16 at src/modal_mem/cos_step.hex:0 does not match memory width 14("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":61)
+WARN  (EX2526) : Entry size 28 at src/modal_mem/drive.hex:0 does not match memory width 25("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":64)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 12("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":110)
+WARN  (EX3791) : Expression size 14 truncated to fit in target size 12("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":163)
+WARN  (EX3791) : Expression size 27 truncated to fit in target size 25("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":232)
+WARN  (EX3791) : Expression size 49 truncated to fit in target size 40("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":432)
+WARN  (EX3791) : Expression size 49 truncated to fit in target size 40("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":433)
+WARN  (EX3791) : Expression size 58 truncated to fit in target size 40("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":436)
+WARN  (EX3791) : Expression size 58 truncated to fit in target size 40("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\additive4_tone.v":436)
+Compiling module 'limiter16(W=22)'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\limiter16.v":15)
+Compiling module 'limiter16(W=18)'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\limiter16.v":15)
+Compiling module 'audio_fx'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_fx.v":6)
+Extracting RAM for identifier 'ram'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_fx.v":48)
+WARN  (EX3791) : Expression size 18 truncated to fit in target size 10("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_fx.v":150)
+WARN  (EX3791) : Expression size 17 truncated to fit in target size 16("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_fx.v":182)
+Compiling module 'i2s_tx'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\i2s_tx.v":27)
+Compiling module 'spi_slave_bytes(FIFO_AW=2)'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\spi_slave_bytes.v":50)
+Extracting RAM for identifier 'fifo'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\spi_slave_bytes.v":119)
+Compiling module 'power_control'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\power_control.v":4)
+Compiling module 'uart_tx'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\uart_tx.v":10)
+Compiling module 'envelope_store'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\envelope_store.v":3)
+Compiling module 'audio_analyzer'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":9)
+Extracting RAM for identifier 'capture'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":31)
+Extracting RAM for identifier 'real_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":32)
+Extracting RAM for identifier 'imag_mem'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":32)
+Extracting RAM for identifier 'levels'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":33)
+Extracting RAM for identifier 'cosine'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":34)
+WARN  (EX3791) : Expression size 18 truncated to fit in target size 16("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":113)
+WARN  (EX3791) : Expression size 18 truncated to fit in target size 16("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":113)
+WARN  (EX3791) : Expression size 36 truncated to fit in target size 18("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":121)
+WARN  (EX3791) : Expression size 19 truncated to fit in target size 18("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":81)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 8("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":134)
+WARN  (EX3791) : Expression size 36 truncated to fit in target size 19("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":84)
+WARN  (EX3791) : Expression size 12 truncated to fit in target size 11("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\audio_analyzer.v":235)
+Compiling module 'ads7950_spi(SCLK_HZ=3125000)'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\ads7950_spi.v":23)
+Compiling module 'strum_detect'("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\strum_detect.v":23)
+NOTE  (EX0101) : Current top module is "top_gv_host"
+[5%] Running netlist conversion ...
+WARN  (CV0016) : Input rx is unused("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v":109)
+Running device independent optimization ...
+[10%] Optimizing Phase 0 completed
+[15%] Optimizing Phase 1 completed
+[25%] Optimizing Phase 2 completed
+Running inference ...
+[30%] Inferring Phase 0 completed
+[40%] Inferring Phase 1 completed
+[50%] Inferring Phase 2 completed
+[55%] Inferring Phase 3 completed
+Running technical mapping ...
+[60%] Tech-Mapping Phase 0 completed
+[65%] Tech-Mapping Phase 1 completed
+[75%] Tech-Mapping Phase 2 completed
+[80%] Tech-Mapping Phase 3 completed
+[90%] Tech-Mapping Phase 4 completed
+WARN  (NL0002) : The module "uart_tx" instantiated to "u_optx" is swept in optimizing("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v":1987)
+WARN  (NL0002) : The module "limiter16" instantiated to "u_send_limiter" is swept in optimizing("D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\top_gv_host.v":1112)
+[95%] Generate netlist file "D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\impl\gwsynthesis\gv_host.vg" completed
+[100%] Generate report file "D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\impl\gwsynthesis\gv_host_syn.rpt.html" completed
+GowinSynthesis finish
+Reading netlist file: "D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\impl\gwsynthesis\gv_host.vg"
+Parsing netlist file "D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\impl\gwsynthesis\gv_host.vg" completed
+Processing netlist completed
+Reading constraint file: "D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\src\pluck_gv.cst"
+Physical Constraint parsed completed
+Running placement......
+[10%] Placement Phase 0 completed
+[20%] Placement Phase 1 completed
+[30%] Placement Phase 2 completed
+[50%] Placement Phase 3 completed
+Running routing......
+[60%] Routing Phase 0 completed
+[70%] Routing Phase 1 completed
+[80%] Routing Phase 2 completed
+[90%] Routing Phase 3 completed
+Running timing analysis......
+[95%] Timing analysis completed
+Placement and routing completed
+Bitstream generation in progress......
+Bitstream generation completed
+Running power analysis......
+[100%] Power analysis completed
+Generate file "D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\impl\pnr\gv_host.power.html" completed
+Generate file "D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\impl\pnr\gv_host.pin.html" completed
+Generate file "D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\impl\pnr\gv_host.rpt.html" completed
+Generate file "D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\impl\pnr\gv_host.rpt.txt" completed
+Generate file "D:\ukulele_handoff\debug\2026-11-13-playback\FPGA\modal60\impl\pnr\gv_host.tr.html" completed
+Fri Nov 13 02:20:29 2026
+

@@ -1,0 +1,370 @@
+================================================================
+  Page 5 — gain（四弦独立调节）  ★ 新增
+  控件清单：docs/02-控件清单.md 第 6 节
+  协议：docs/01-协议设计.md §1、§2（pid 表）
+================================================================
+
+每根弦分别调【触发阈值】和【增益】，改完立即生效，再请求回读确认。
+
+★ pid 换算（屏幕行序 G/C/E/A，pid 序是 G/E/C/A —— 必须换算）
+    vsel=0  弦 G   vthpid=0  vgnpid=4  vra/vdg=0  vev bit0(值1)
+    vsel=1  弦 C   vthpid=2  vgnpid=6  vra/vdg=2  vev bit2(值4)
+    vsel=2  弦 E   vthpid=1  vgnpid=5  vra/vdg=1  vev bit1(值2)
+    vsel=3  弦 A   vthpid=3  vgnpid=7  vra/vdg=3  vev bit3(值8)
+
+★ 取值范围
+    阈值 0~4095（pid 0~3，12 位）
+    增益 0~255 （pid 4~7，8 位；64 = 1.0 倍）
+
+--------------------------------------------------------
+【后初始化事件 Postinitialize Event】   ← 页面空白处 → 事件面板「后初始化事件」
+--------------------------------------------------------
+vsel=0
+vlsel=9        // 故意设成非法值，逼定时器第一拍执行一次完整刷新
+vstage=0
+vackt=0
+// 进页面先把心跳同步一次，别第一拍就误判离线
+vbeatLast=vbeat
+vbeatAge=0
+g_ack.txt=""
+tm0.en=1
+
+
+--------------------------------------------------------
+【定时器 tm0 事件】  tim=150, en=1   ← 单击选中 tm0 控件 → 事件面板「定时器事件」
+--------------------------------------------------------
+
+// ===== ① 选中项变化时，做一次完整刷新 =====
+//   ★ 只在 vsel 变了的时候刷 —— 每拍都刷会和用户拖动的滑块打架。
+if(vsel!=vlsel)
+{
+  vlsel=vsel
+
+  // ---- 定 pid / 索引 / 位 ----
+  if(vsel==0)
+  {
+    vthpid=0
+    vgnpid=4
+    vraidx=0
+    vvevbit=1
+    g_cur.txt="当前：G 弦"
+  }
+  if(vsel==1)
+  {
+    vthpid=2
+    vgnpid=6
+    vraidx=2
+    vvevbit=4
+    g_cur.txt="当前：C 弦"
+  }
+  if(vsel==2)
+  {
+    vthpid=1
+    vgnpid=5
+    vraidx=1
+    vvevbit=2
+    g_cur.txt="当前：E 弦"
+  }
+  if(vsel==3)
+  {
+    vthpid=3
+    vgnpid=7
+    vraidx=3
+    vvevbit=8
+    g_cur.txt="当前：A 弦"
+  }
+
+  // ---- 从镜像取当前值填进控件 ----
+  if(vsel==0)
+  {
+    g_th.val=vp0
+    g_thv.val=vp0
+    g_gn.val=vp4
+    g_gnv.val=vp4
+  }
+  if(vsel==1)
+  {
+    g_th.val=vp2
+    g_thv.val=vp2
+    g_gn.val=vp6
+    g_gnv.val=vp6
+  }
+  if(vsel==2)
+  {
+    g_th.val=vp1
+    g_thv.val=vp1
+    g_gn.val=vp5
+    g_gnv.val=vp5
+  }
+  if(vsel==3)
+  {
+    g_th.val=vp3
+    g_thv.val=vp3
+    g_gn.val=vp7
+    g_gnv.val=vp7
+  }
+
+  // ---- 选弦按钮高亮 ----
+  g_s0.bco=22979
+  g_s0.pco=65535
+  g_s1.bco=22979
+  g_s1.pco=65535
+  g_s2.bco=22979
+  g_s2.pco=65535
+  g_s3.bco=22979
+  g_s3.pco=65535
+  if(vsel==0)
+  {
+    g_s0.bco=56784
+    g_s0.pco=0
+  }
+  if(vsel==1)
+  {
+    g_s1.bco=56784
+    g_s1.pco=0
+  }
+  if(vsel==2)
+  {
+    g_s2.bco=56784
+    g_s2.pco=0
+  }
+  if(vsel==3)
+  {
+    g_s3.bco=56784
+    g_s3.pco=0
+  }
+}
+
+// ===== ② 把滑块的实时值同步到数字控件（拖动时也要跟手）=====
+g_thv.val=g_th.val
+g_gnv.val=g_gn.val
+
+// ===== ③ 两段式发送：先写参数，再请求回读 =====
+//   AA 0A 帧固定 10 字节：AA 0A 05 op ch vlo vmid vhi crc seq
+//   crc = 0x0A ^ 0x05 ^ op ^ ch ^ vlo ^ vmid ^ vhi
+//   必须按三个数值字节分别异或；直接异或完整 vval 会把高位参与进来，
+//   阈值超过 255 后得到错误 CRC。
+//
+//   TJC 可以直接写 ^ 位运算（主手册 §6.2.3，p.845~849）。
+//   ★ 但不能加括号，也不能在运算符两边加空格。
+if(vstage==1)
+{
+// 新协议1A：序号在校验范围内，独立于实时刷新心跳序号。
+vopseq=vopseq+1
+if(vopseq>127)
+{
+  vopseq=0
+}
+vreqseq=vopseq
+vlo=vval%256
+vmid=vval/256
+vmid=vmid%256
+vhi=vval/65536
+vhi=vhi%256
+vcrc=26
+vcrc=vcrc^6
+vcrc=vcrc^vopr
+vcrc=vcrc^voch
+vcrc=vcrc^vlo
+vcrc=vcrc^vmid
+vcrc=vcrc^vhi
+vcrc=vcrc^vreqseq
+vopstatus=1
+vopage=0
+printh AA 1A 06
+prints vopr,1
+prints voch,1
+prints vlo,1
+prints vmid,1
+prints vhi,1
+prints vreqseq,1
+prints vcrc,1
+  vstage=0
+}
+
+
+// 第二段：请求参数回读（op=1，ch 填 0，值填 0）
+
+
+// ===== ④ 回读确认 =====
+if(vopack==vreqseq)
+{
+  if(voptype==8)
+  {
+    if(vopstatus==1)
+    {
+      g_ack.txt="等待实际回读"
+      g_ack.pco=65504
+    }
+    if(vopstatus==2)
+    {
+      g_ack.txt="实际参数已确认"
+      g_ack.pco=2016
+    }
+    if(vopstatus>2)
+    {
+      g_ack.txt="未确认：失败或离线"
+      g_ack.pco=63488
+    }
+  }
+}
+
+
+// ===== ⑤ 顺便把当前弦的实时值也刷一下（可选，便于边调边看）=====
+//   失联时不刷，避免把旧值当实时值
+if(vlink==1)
+{
+  if(vsel==0)
+  {
+    g_thv.pco=56784
+  }
+}
+
+// ===== ⑥ 请求一帧实时数据（维持链路判断）=====
+printh AA 0B
+prints vseq,1
+vseq=vseq+1
+if(vseq>255)
+{
+  vseq=0
+}
+
+// ===== 链路判断（和 main / opt 页同一套）=====
+//   读数连续 30 拍没变 => 认为下位机没在发数据
+// ESP32 每收到一次 AA 0B 就把 vbeat 写成新值
+if(vbeat!=vbeatLast)
+{
+  vbeatLast=vbeat
+  vbeatAge=0
+  vlink=1
+}else
+{
+  vbeatAge=vbeatAge+1
+  if(vbeatAge>15)
+  {
+    vlink=0
+  }
+}
+if(vlink==1)
+{
+  g_lk.txt="在线"
+  g_lk.bco=22979
+  g_lk.pco=2016
+}else
+{
+  g_lk.txt="离线"
+  g_lk.bco=63488
+  g_lk.pco=0
+}
+
+
+--------------------------------------------------------
+【选弦按钮 g_s0 / g_s1 / g_s2 / g_s3 弹起事件】
+--------------------------------------------------------
+// g_s0 → G 弦
+vsel=0
+// g_s1 → C 弦
+vsel=1
+// g_s2 → E 弦
+vsel=2
+// g_s3 → A 弦
+vsel=3
+
+
+--------------------------------------------------------
+【按钮 g_prev 弹起事件】 codesup —— 上一弦
+--------------------------------------------------------
+vsel=vsel-1
+if(vsel<0)
+{
+  vsel=3
+}
+
+
+--------------------------------------------------------
+【按钮 g_next 弹起事件】 codesup —— 下一弦
+--------------------------------------------------------
+vsel=vsel+1
+if(vsel>3)
+{
+  vsel=0
+}
+
+
+--------------------------------------------------------
+【滑块 g_th 弹起事件】 codesup —— 改阈值
+--------------------------------------------------------
+// 阈值直接使用滑块值。协议和 FPGA 都支持完整的 12 位，不做额外量化，
+// 这样回读确认比较的就是用户实际设置的数值。
+vwt=g_th.val
+g_th.val=vwt
+g_thv.val=vwt
+
+vopr=0
+voch=vthpid
+vval=vwt
+vstage=1
+vcheckpid=vthpid      // ★ 记下这次写的是哪个 pid，回读确认时比对用
+g_ack.txt=""
+g_ack.pco=65504
+
+
+--------------------------------------------------------
+【滑块 g_gn 弹起事件】 codesup —— 改增益
+--------------------------------------------------------
+vwt=g_gn.val
+vopr=0
+voch=vgnpid
+vval=g_gn.val
+vstage=1
+vcheckpid=vgnpid      // ★ 增益是 pid 4~7，不能用 vsel 去比对回读
+g_ack.txt=""
+g_ack.pco=65504
+
+
+--------------------------------------------------------
+【按钮 g_back 弹起事件】 codesup
+--------------------------------------------------------
+page opt
+
+
+================================================================
+  说明
+================================================================
+
+1. ★★ 为什么发送放在定时器里，不放在按钮里？
+   TJC 没有函数。若 16 个按钮每个都抄一遍 15 行发帧代码，
+   必然有一两处抄错（少一个 prints、变量名写错），
+   而错误是**静默的**：帧长对不上 → ESP32 收帧错位 → 参数乱套。
+   集中到定时器里只有一份需要核对。
+
+2. ★★ 必须逐字节核对帧长。以 vsel=0、阈值写 180、增益 64 为例：
+
+      printh AA 0A 05      →  AA 0A 05
+      prints vopr,1        →  00                  累计 4
+      prints voch,1        →  00                  累计 5
+      prints vlo,1         →  B4 (180)            累计 6
+      prints vmid,1        →  00                  累计 7
+      prints vhi,1         →  00                  累计 8
+      prints vcrc,1        →  15^00^00^B4 = A1    累计 9
+      prints vseq,1        →  N                   累计 10  确认
+
+   固件侧 screen_link.cpp 的 aaFrameLen(0x0A)=10，正好收帧。
+   **多一个字节就会污染下一帧**（历史上踩过：prints 同一个变量发了两次）。
+
+3. 两个 `if(vstage==...)` 会在**同一拍**里连着发两帧（10+10 = 20 字节）。
+   这是安全的 —— ESP32 按**固定长度**分帧，不靠结束符。
+
+4. `vstage` 是"待发送阶段"标志，初值必须是 0（在 Program.s 里声明）。
+   若发现进页面就自动发了一帧，检查 Program.s 里 `int vstage=0`。
+
+5. 滑块拖动时数字控件跟手靠第 ② 步 `g_thv.val=g_th.val`。
+   但**不能每拍都把 `g_th.val` 从 `vp*` 刷回来** ——
+   那样用户拖到一半会被强行拉回旧值，手感是"滑块黏住不动"。
+
+6. 阈值对齐到 4 的倍数只是手感优化，协议上没有要求。
+   要去掉就把 `vwt=vwt/4*4` 那一行删掉。
+
+7. 本页需要显示的中文：四弦调节、在线、阈值、增益、当前：、G 弦、C 弦、
+   E 弦、A 弦、阈值调高更不容易误触，增益调高更灵敏、已确认、未回读、
+   上一弦、下一弦、返回

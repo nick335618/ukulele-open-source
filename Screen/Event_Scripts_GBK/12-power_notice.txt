@@ -1,0 +1,57 @@
+页面 power_notice — power_notice（休眠提醒）；320×240。完整控件属性见 docs/休眠实现与控件清单_v3.3.0.md。
+
+【后初始化事件】
+tm0.en=1
+vis t_tmp,0
+
+【定时器 tm0 事件；tim=100,en=1】
+covx vcountdown,t_tmp.txt,0,0
+t_count.txt=t_tmp.txt+"秒后自动休眠"
+if(vpowerstate==3)
+{
+  t_count.txt="正在进入休眠"
+}
+if(vpowerstate==4)
+{
+  t_count.txt="已休眠，轻触可唤醒"
+}
+if(vpowerstate==5)
+{
+  t_count.txt="正在唤醒"
+}
+if(vpowerstate==6)
+{
+  t_count.txt="操作超时，请点继续使用"
+}
+if(vpowerstate<2)
+{
+  page main
+}
+
+【按钮 b_keep 弹起事件；取消提醒】
+vpop=3
+if(vpowerstate>2)
+{
+  vpop=2
+}
+vpextra=0
+vpowerseq=vpowerseq+1
+if(vpowerseq>65535)
+{
+  vpowerseq=0
+}
+vpseqlo=vpowerseq%256
+vpseqhi=vpowerseq/256
+vpcrc=28
+vpcrc=vpcrc^5
+vpcrc=vpcrc^1
+vpcrc=vpcrc^vpop
+vpcrc=vpcrc^vpseqlo
+vpcrc=vpcrc^vpseqhi
+vpcrc=vpcrc^vpextra
+printh AA 1C 05 01
+prints vpop,1
+prints vpseqlo,1
+prints vpseqhi,1
+prints vpextra,1
+prints vpcrc,1

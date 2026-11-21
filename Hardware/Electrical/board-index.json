@@ -1,0 +1,62 @@
+[
+  {
+    "board": "主板",
+    "kind": "SCH_PAGE",
+    "preview": "Hardware/Electrical/Previews/主板_原理图.webp"
+  },
+  {
+    "board": "电源板",
+    "kind": "SCH_PAGE",
+    "preview": "Hardware/Electrical/Previews/电源板_原理图.webp"
+  },
+  {
+    "board": "功放板",
+    "kind": "SCH_PAGE",
+    "preview": "Hardware/Electrical/Previews/功放板_原理图.webp"
+  },
+  {
+    "board": "光电管发射端",
+    "kind": "SCH_PAGE",
+    "preview": "Hardware/Electrical/Previews/光电管发射端_原理图.webp"
+  },
+  {
+    "board": "光电管接收端",
+    "kind": "SCH_PAGE",
+    "preview": "Hardware/Electrical/Previews/光电管接收端_原理图.webp"
+  },
+  {
+    "board": "电容品格",
+    "kind": "SCH_PAGE",
+    "preview": "Hardware/Electrical/Previews/电容品格_原理图.webp"
+  },
+  {
+    "board": "主板",
+    "kind": "PCB",
+    "preview": "Hardware/Electrical/Previews/主板_PCB.webp"
+  },
+  {
+    "board": "光电管发射端",
+    "kind": "PCB",
+    "preview": "Hardware/Electrical/Previews/光电管发射端_PCB.webp"
+  },
+  {
+    "board": "功放板",
+    "kind": "PCB",
+    "preview": "Hardware/Electrical/Previews/功放板_PCB.webp"
+  },
+  {
+    "board": "电源板",
+    "kind": "PCB",
+    "preview": "Hardware/Electrical/Previews/电源板_PCB.webp"
+  },
+  {
+    "board": "电容品格",
+    "kind": "PCB",
+    "preview": "Hardware/Electrical/Previews/电容品格_PCB.webp"
+  },
+  {
+    "board": "光电管接收端",
+    "kind": "PCB",
+    "preview": "Hardware/Electrical/Previews/光电管接收端_PCB.webp"
+  }
+]

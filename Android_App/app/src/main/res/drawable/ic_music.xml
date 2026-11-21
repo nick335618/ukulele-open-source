@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Music: beamed pair of eighth notes (beam 2.4dp, stems 2dp, oval heads). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <path android:fillColor="#FFFFFFFF" android:pathData="M9,4h8.4v2.4H9z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M9,4h2v9.4H9z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M15.4,4h2v9.4h-2z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M5,13.4a2.6,2 0 1 0 5.2,0a2.6,2 0 1 0 -5.2,0z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M11.4,13.4a2.6,2 0 1 0 5.2,0a2.6,2 0 1 0 -5.2,0z" />
+</vector>

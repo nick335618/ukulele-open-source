@@ -1,0 +1,62 @@
+[
+  {
+    "path": "src\\modal_mem\\a2.hex",
+    "sha256": "64e6c8adf12e72e90d782a4b2d0c6f0c58ad624d2bf4de9c96a959dd8307abb2"
+  },
+  {
+    "path": "src\\modal_mem\\attack.hex",
+    "sha256": "1130a2b6e008c0ee9153bd47acdbf1196869b8ba7fc51039b7c9ecc876cb65bb"
+  },
+  {
+    "path": "src\\modal_mem\\attack_guitar.hex",
+    "sha256": "cf0a2f1450be5083220e3c7c112659a077d322b89bfbe4be5fa3360c908c62e0"
+  },
+  {
+    "path": "src\\modal_mem\\cos.hex",
+    "sha256": "8a6c77ea283866bf81e26c10ccfb403fdfa97ccc4adb647e6ec8b63b47125533"
+  },
+  {
+    "path": "src\\modal_mem\\cos_step.hex",
+    "sha256": "a568b842db725487a38d56a40210c8dc43e493e0b29b80b139591a67a37e5be2"
+  },
+  {
+    "path": "src\\modal_mem\\drive.hex",
+    "sha256": "805ba334e3bd06728b089b554966c75b499843634d00097a2150f4b15ab23b2d"
+  },
+  {
+    "path": "src\\modal_mem\\g.hex",
+    "sha256": "4411c6a7d4e73a3e6d6ad298ac7a5d8710436dc4026e8602b044dcab41524062"
+  },
+  {
+    "path": "src\\modal_mem\\inc.hex",
+    "sha256": "1721986e6fa9282994b09b59f90c97341b94172f93b11a937684d377cbe58fe3"
+  },
+  {
+    "path": "src\\modal_mem\\rho.hex",
+    "sha256": "19e61816748e5e0121bfe9a1204b0d4b971ac4aa8e2eb644c055cbc04333c3d3"
+  },
+  {
+    "path": "src\\fpga_mem\\aatk.hex",
+    "sha256": "963d058d2ffeec96b5fe922ab2426f2abaadc97936705e38783d5e704fa0a672"
+  },
+  {
+    "path": "src\\fpga_mem\\chmap.hex",
+    "sha256": "f9ed518863798bcf18349d008599b122368ce897a710b124583f7909c5f94c8c"
+  },
+  {
+    "path": "src\\fpga_mem\\env0.hex",
+    "sha256": "f2add93a2d5f5f577053290569c302ec69e922380ee3ee543d978f709dbe7e66"
+  },
+  {
+    "path": "src\\fpga_mem\\inc.hex",
+    "sha256": "2dc41444b32f9e66921579ad916b5f165a7c1ce0e12ec595b1b793bebc9ab389"
+  },
+  {
+    "path": "src\\fpga_mem\\ph0.hex",
+    "sha256": "4740d663f507e2eee51ef8e1d8c029fd36024049d9daa15533549b808516836b"
+  },
+  {
+    "path": "src\\fpga_mem\\rate.hex",
+    "sha256": "a0d750bdd757c2b8cdcc7b4608925fd6bb113604b30676b4c30a724f42bac608"
+  }
+]

@@ -1,0 +1,419 @@
+﻿Board,Designator,Name,Value,Manufacturer Part,Supplier Part,Footprint
+主板,U1,,,,,
+主板,U2,,,,,
+主板,J2,,,,,
+主板,J3,,,,,
+主板,U7,,,SY8089AAAC,C78988,
+主板,L1,,2.2uH,PNR4030-2R2-N,C55381752,
+主板,C1,,22uF,HGC1206R5226M250NSPJ,C7432786,
+主板,C3,,22uF,HGC1206R5226M250NSPJ,C7432786,
+主板,C4,,22uF,HGC1206R5226M250NSPJ,C7432786,
+主板,C2,,22pF,CL10C220JB8NNNC,C1653,
+主板,C5,,100nF,CC0603KRX7R0BB104,C113803,
+主板,R1,,100kΩ,FRC0603F1003TS,C2906980,
+主板,R2,,442kΩ,FRC0603F4423TS,C3013201,
+主板,CN1,={Manufacturer Part},,WAFER-XH2.54-6PWZ,C5359643,4142f46a43c34ba7
+主板,U11,={Manufacturer Part},,WAFER-XH254WZ-2A,C7432691,b80a9aea515a74e4
+主板,U8,={Manufacturer Part},,XH2.54-4PSMD,C9900001014,d131aacc3509b432
+主板,CN2,={Manufacturer Part},,ZX-XH2.54-14PWZ,C22366175,05ea68af4d4cab7f
+主板,U9,={Manufacturer Part},,XH2.54-4PSMD,C9900001014,d131aacc3509b432
+主板,C7,,100nF,CC0603KRX7R0BB104,C113803,
+主板,U10,={Manufacturer Part},,XH2.54-4PSMD,C9900001014,d131aacc3509b432
+主板,J1,,,,,
+主板,SCREW1,,,,,
+主板,SCREW2,,,,,
+主板,SCREW3,,,,,
+主板,SCREW4,,,,,
+主板,C6,,22uF,HGC1206R5226M250NSPJ,C7432786,
+主板,U3,,,,,
+主板,U4,,,,,
+主板,R3,,,,,
+主板,R4,,,,,
+主板,R5,,,,,
+主板,R6,,,,,
+电源板,USB1,,,,,0df2451eee26ce93
+电源板,C5,={Value},10uF,,,fa31391cea67d034
+电源板,C6,={Value},10nF,,,fa31391cea67d034
+电源板,C7,={Value},10uf,,,fa31391cea67d034
+电源板,C8,={Value},100nF,,,fa31391cea67d034
+电源板,L2,={Value},18UH,FXL0630-150-M,,4f1b2ffed9fcdeaa
+电源板,R5,={Value},10K,,,824d37ffcfeae91e
+电源板,R6,={Value},3.24K,,,824d37ffcfeae91e
+电源板,D1,={Manufacturer Part},,SS34,C727060,3d937382e84124a1
+电源板,U8,={Manufacturer Part},,TPS5430DDAR,C9864,ed5ccdaa0268916c
+电源板,U1,={Manufacturer Part},,,,1c1c81de8c924366
+电源板,U2,={Manufacturer Part},,,,a512a372509ecaa0
+电源板,L1,={Value},2.2uH,ASPI-0530HI-2R2M-T2,C7217567,a30b3748a5545d9c
+电源板,C3,={Value},,,,6c87f6ea96b3ac82
+电源板,C4,={Value},22UF,,,6c87f6ea96b3ac82
+电源板,C9,={Value},,,,6c87f6ea96b3ac82
+电源板,R1,={Value},309k,,,3146ff4f4f6f4310
+电源板,C1,={Value},2.2uf,,,6c87f6ea96b3ac82
+电源板,C2,={Value},47UF,,,d9baa086625a5eaf
+电源板,C10,={Value},47UF,,,d9baa086625a5eaf
+电源板,C11,={Value},47UF,,,d9baa086625a5eaf
+电源板,R2,={Value},82k,,,3146ff4f4f6f4310
+电源板,R3,={Value},9.1k,,,3146ff4f4f6f4310
+电源板,R4,={Value},100kΩ,0603WAF1003T5E,C25803,e21118c488dea157
+电源板,C13,={Value},3.3nf,,,6c87f6ea96b3ac82
+电源板,R7,={Value},100k,,,3146ff4f4f6f4310
+电源板,P1,={Manufacturer Part},,,,8c8cb5eaee8ebfb4
+电源板,R11,={Value},75k,,,3146ff4f4f6f4310
+电源板,R13,={Value},51k,,,3146ff4f4f6f4310
+电源板,R14,={Value},120k,,,3146ff4f4f6f4310
+电源板,R15,={Value},1k,,,3146ff4f4f6f4310
+电源板,LED1,,,,,c3567bff40e3e8de
+电源板,R16,={Value},1k,,,3146ff4f4f6f4310
+电源板,LED2,,,,,c3567bff40e3e8de
+电源板,C12,={Value},10uf,,,6c87f6ea96b3ac82
+电源板,C14,={Value},10uf,,,6c87f6ea96b3ac82
+电源板,C15,={Value},10uf,,,6c87f6ea96b3ac82
+电源板,C16,={Value},10uf,,,6c87f6ea96b3ac82
+电源板,C17,={Value},10uf,,,6c87f6ea96b3ac82
+电源板,C18,={Value},,,,6c87f6ea96b3ac82
+电源板,L3,={Value},2.2uH,ASPI-0530HI-2R2M-T2,C7217567,a30b3748a5545d9c
+电源板,R17,={Value},0.5r,,,3146ff4f4f6f4310
+电源板,C19,={Value},10uf,,,6c87f6ea96b3ac82
+电源板,C20,={Value},10uf,,,6c87f6ea96b3ac82
+电源板,R18,={Value},5.1k,,,3146ff4f4f6f4310
+电源板,R19,={Value},5.1k,,,3146ff4f4f6f4310
+电源板,U5,={Manufacturer Part},,,,15be42ecccff71d4
+电源板,C21,={Value},1uf,,,39ac30490168229e
+电源板,R8,={Value},30k,,,eac92dca05dc16ee
+电源板,R9,={Value},5k,,,eac92dca05dc16ee
+电源板,R10,={Value},10.2k,,,eac92dca05dc16ee
+电源板,R12,={Value},23.7k,,,eac92dca05dc16ee
+电源板,R20,={Value},5k,,,eac92dca05dc16ee
+电源板,U9,={Manufacturer Part},,SH-XH2.54-4PZZ,C54431935,1a007eff91296cd8
+电源板,U3,={Manufacturer Part},,SH-XH2.54-4PZZ,C54431935,1a007eff91296cd8
+电源板,U4,={Manufacturer Part},,SH-XH2.54-4PZZ,C54431935,1a007eff91296cd8
+电源板,SCREW1,,,,,
+电源板,SCREW2,,,,,
+电源板,SCREW3,,,,,
+电源板,SCREW4,,,,,
+电源板,Q5,={Manufacturer Part},,FS4435,C5443901,661457f208493c8b
+电源板,SW2,={Manufacturer Part},,MSK12C02-HB,C431541,d05d7a748145698d
+电源板,R21,={Value},10K,,,824d37ffcfeae91e
+电源板,U6,,,,,
+电源板,LDO1,,,,,
+电源板,C22,,,,,
+电源板,C23,,,,,
+电源板,C24,={Value},100nF,,,6c87f6ea96b3ac82
+电源板,P2,={Manufacturer Part},,XH2.54直插座-2P,C9900016957,8c8cb5eaee8ebfb4
+电源板,U7,={Manufacturer Part},,TCA9536DGKR,C3194610,a9363cb2dd07f334
+电源板,C25,,,,,
+电源板,R22,,,,,
+电源板,R23,,,,,
+电源板,U11,,,,,
+电源板,L4,,,,,
+电源板,C26,,,,,
+电源板,C27,,,,,
+电源板,C28,,,,,
+电源板,R26,,,,,
+电源板,R27,,,,,
+电源板,R28,,,,,
+电源板,C29,,,,,
+电源板,C30,,,,,
+电源板,D2,={Manufacturer Part},,SS34,C727060,3d937382e84124a1
+电源板,C31,,,,,
+电源板,R24,,,,,
+电源板,R25,,,,,
+功放板,U2,={Manufacturer Part},,,,c380b429bb9faa03
+功放板,C1,={Value},10UF,,,e4557a979a0e11c5
+功放板,C2,={Value},,,,e4557a979a0e11c5
+功放板,C3,={Value},10UF,,,e4557a979a0e11c5
+功放板,C4,={Value},,,,e4557a979a0e11c5
+功放板,C5,={Value},10UF,,,e4557a979a0e11c5
+功放板,C6,={Value},,,,e4557a979a0e11c5
+功放板,C7,={Value},2.2uf,,,e4557a979a0e11c5
+功放板,C8,={Value},2.2uf,,,e4557a979a0e11c5
+功放板,R2,={Value},470,,,42eb0f8b7197d35b
+功放板,C10,={Value},2.2nf,,,e4557a979a0e11c5
+功放板,C11,={Value},10UF,,,e4557a979a0e11c5
+功放板,C12,={Value},,,,e4557a979a0e11c5
+功放板,U1,={Manufacturer Part},,,,5ed952601d3bbe65
+功放板,C13,={Value},100UF,,,195d7c7ea8a80767
+功放板,C14,={Value},100nF,,,e4557a979a0e11c5
+功放板,C15,={Value},1nf,,,e4557a979a0e11c5
+功放板,C16,={Value},0.47uf,,,e4557a979a0e11c5
+功放板,L1,={Manufacturer Part},,,,b602b653783c1a6e
+功放板,C17,={Value},0.47uf,,,e4557a979a0e11c5
+功放板,L2,={Manufacturer Part},,,,b602b653783c1a6e
+功放板,C18,={Value},1nf,,,e4557a979a0e11c5
+功放板,C19,={Value},1nf,,,e4557a979a0e11c5
+功放板,R3,={Value},10,,,42eb0f8b7197d35b
+功放板,C9,={Value},1uf,,,e4557a979a0e11c5
+功放板,C20,={Value},1uf,,,e4557a979a0e11c5
+功放板,C21,={Value},1uf,,,e4557a979a0e11c5
+功放板,C22,={Value},1uf,,,e4557a979a0e11c5
+功放板,R4,={Value},100kΩ,0603WAF1003T5E,C25803,e21118c488dea157
+功放板,C23,={Value},100UF,,,195d7c7ea8a80767
+功放板,C24,={Value},100nF,,,e4557a979a0e11c5
+功放板,C25,={Value},1nf,,,e4557a979a0e11c5
+功放板,C93,={Value},100nF,,,3a5bcfe6f83befa7
+功放板,C94,={Value},10uf,,,3a5bcfe6f83befa7
+功放板,C95,={Value},100nF,,,3a5bcfe6f83befa7
+功放板,U28,={Manufacturer Part},,RT9013-33GU5,C3034127,2004fbc14eb47ed0
+功放板,U3,={Manufacturer Part},,,,d131aacc3509b432
+功放板,U4,={Manufacturer Part},,,,d131aacc3509b432
+功放板,SCREW1,,,,,0eda3abedbd78f52
+功放板,SCREW2,,,,,0eda3abedbd78f52
+功放板,SCREW3,,,,,0eda3abedbd78f52
+功放板,SCREW4,,,,,0eda3abedbd78f52
+功放板,U6,,,,,
+功放板,C26,={Value},1uf,,,e4557a979a0e11c5
+功放板,C27,={Value},1uf,,,e4557a979a0e11c5
+功放板,CN1,,,,,
+功放板,C28,,,,,
+功放板,C29,,,,,
+功放板,C30,,,,,
+功放板,C31,={Value},100nF,,,3a5bcfe6f83befa7
+功放板,R7,={Value},22kΩ,0603WAF2202T5E,C31850,e21118c488dea157
+功放板,R8,={Value},1kΩ,0603WAF1001T5E,C21190,e21118c488dea157
+功放板,R9,={Value},1kΩ,0603WAF1001T5E,C21190,e21118c488dea157
+功放板,U5,={Manufacturer Part},,XH2.54-4PSMD,C9900001014,d131aacc3509b432
+功放板,R10,,,,,
+功放板,C32,={Value},10UF,,,e4557a979a0e11c5
+功放板,Q1,,,,,
+功放板,R11,,,,,
+功放板,C33,,,,,
+功放板,R12,,,,,
+功放板,D1,,,,,
+功放板,R1,,,,,
+功放板,Q2,,,,,
+功放板,R13,,,,,
+功放板,R5,,,,,
+光电管发射端,U1,,,,,
+光电管发射端,U2,,,,,
+光电管发射端,U3,,,,,
+光电管发射端,U4,,,,,
+光电管发射端,R1,={Value},43Ω,FRC1210F43R0TS,C2999573,c2bfdc80a5d0ef70
+光电管发射端,R2,={Value},43Ω,FRC1210F43R0TS,C2999573,c2bfdc80a5d0ef70
+光电管发射端,R3,={Value},43Ω,FRC1210F43R0TS,C2999573,c2bfdc80a5d0ef70
+光电管发射端,R4,={Value},43Ω,FRC1210F43R0TS,C2999573,c2bfdc80a5d0ef70
+光电管发射端,C27,,,,,
+光电管发射端,C28,,,,,
+光电管发射端,SCREW1,,,,,
+光电管发射端,SCREW2,,,,,
+光电管发射端,SCREW3,,,,,
+光电管发射端,SCREW4,,,,,
+光电管发射端,U5,,,,,
+光电管发射端,C1,,100nF,FCC0603B104K500CT,C5137636,
+光电管发射端,Q1,,,,,
+光电管发射端,Q2,,,,,
+光电管发射端,Q3,,,,,
+光电管发射端,Q4,,,,,
+光电管发射端,R5,,,,,
+光电管发射端,R6,,,,,
+光电管发射端,R7,,,,,
+光电管发射端,R8,,,,,
+光电管发射端,U6,,,,,
+光电管发射端,U7,,,,,
+光电管接收端,LED1,,,,,
+光电管接收端,LED2,,,,,
+光电管接收端,LED3,,,,,
+光电管接收端,LED4,,,,,
+光电管接收端,U5,,,,,
+光电管接收端,U5,,,,,
+光电管接收端,U5,,,,,
+光电管接收端,U5,,,,,
+光电管接收端,U6,,,,,
+光电管接收端,C1,={Value},100nF,CL05B104KO5NNNC,C1525,d68ae38361c22f1e
+光电管接收端,C6,={Value},100nF,CL05B104KO5NNNC,C1525,d68ae38361c22f1e
+光电管接收端,C7,={Value},100nF,CL05B104KO5NNNC,C1525,d68ae38361c22f1e
+光电管接收端,C11,={Value},100nF,CL05B104KO5NNNC,C1525,d68ae38361c22f1e
+光电管接收端,C12,={Value},100nF,CL05B104KO5NNNC,C1525,d68ae38361c22f1e
+光电管接收端,C19,={Value},100nF,CL05B104KO5NNNC,C1525,d68ae38361c22f1e
+光电管接收端,C2,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+光电管接收端,C3,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+光电管接收端,C4,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+光电管接收端,C5,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+光电管接收端,C8,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+光电管接收端,C15,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+光电管接收端,C13,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+光电管接收端,C20,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+光电管接收端,U7,,,,,
+光电管接收端,U8,,,,,
+光电管接收端,R7,={Value},10kΩ,FRC0402F1002TS,C2906861,6af6330a2b447a78
+光电管接收端,R6,={Value},10kΩ,FRC0402F1002TS,C2906861,6af6330a2b447a78
+光电管接收端,R9,={Value},10kΩ,FRC0402F1002TS,C2906861,6af6330a2b447a78
+光电管接收端,R11,={Value},10kΩ,FRC0402F1002TS,C2906861,6af6330a2b447a78
+光电管接收端,R13,={Value},10kΩ,FRC0402F1002TS,C2906861,6af6330a2b447a78
+光电管接收端,C9,={Value},47pF,CC0402JRNPO9BN470,C60137,d68ae38361c22f1e
+光电管接收端,C23,={Value},47pF,CC0402JRNPO9BN470,C60137,d68ae38361c22f1e
+光电管接收端,C21,={Value},47pF,CC0402JRNPO9BN470,C60137,d68ae38361c22f1e
+光电管接收端,C25,={Value},47pF,CC0402JRNPO9BN470,C60137,d68ae38361c22f1e
+光电管接收端,R5,={Value},15kΩ,FRC0402F1502TS,C2909322,6af6330a2b447a78
+光电管接收端,R8,={Value},47Ω,FRC0402F47R0TS,C2909362,6af6330a2b447a78
+光电管接收端,R10,={Value},47Ω,FRC0402F47R0TS,C2909362,6af6330a2b447a78
+光电管接收端,R12,={Value},47Ω,FRC0402F47R0TS,C2909362,6af6330a2b447a78
+光电管接收端,R14,={Value},47Ω,FRC0402F47R0TS,C2909362,6af6330a2b447a78
+光电管接收端,C10,={Value},100pF,CC0402JRNPO9BN101,C106200,d68ae38361c22f1e
+光电管接收端,C24,={Value},100pF,CC0402JRNPO9BN101,C106200,d68ae38361c22f1e
+光电管接收端,C22,={Value},100pF,CC0402JRNPO9BN101,C106200,d68ae38361c22f1e
+光电管接收端,C26,={Value},100pF,CC0402JRNPO9BN101,C106200,d68ae38361c22f1e
+光电管接收端,C17,={Value},100nF,CL05B104KO5NNNC,C1525,d68ae38361c22f1e
+光电管接收端,C18,={Value},100nF,CL05B104KO5NNNC,C1525,d68ae38361c22f1e
+光电管接收端,U9,,,TPS7A2033PDBVR,C2862740,
+光电管接收端,U10,,,,,
+光电管接收端,R15,,,,,
+光电管接收端,R16,,,,,
+光电管接收端,R17,,,,,
+光电管接收端,R18,,,,,
+光电管接收端,SCREW1,,,,,
+光电管接收端,SCREW2,,,,,
+光电管接收端,SCREW3,,,,,
+光电管接收端,SCREW4,,,,,
+光电管接收端,CN1,,,,,
+电容品格,U1,,,LP5860RKPR,C3189477,
+电容品格,C12,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C14,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C15,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C1,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C2,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C3,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,R3,,10kΩ,FRC0402F1002TS,C2906861,
+电容品格,R1,,10kΩ,FRC0402F1002TS,C2906861,
+电容品格,U3,,,AD7147ACPZ-500RL7,C207411,
+电容品格,U7,,,AD7147ACPZ-500RL7,C207411,
+电容品格,U2,,,OPA320AIDBVR,C92494,
+电容品格,U6,,,OPA320AIDBVR,C92494,
+电容品格,R4,,33Ω,RC0402FR-0733RL,C138002,
+电容品格,R2,,33Ω,RC0402FR-0733RL,C138002,
+电容品格,U4,,,SN74LVC138ADR,C7816,
+电容品格,U5,,,SN74HC148DR(LX),C41413103,
+电容品格,LED7,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED8,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,C4,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+电容品格,C13,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+电容品格,C5,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+电容品格,C6,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+电容品格,C7,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+电容品格,C11,={Value},1uF,HGC0402R5105K500NTEJ,C7472948,d68ae38361c22f1e
+电容品格,U9,,,TPS7A2033PDBVR,C2862740,
+电容品格,C8,,1nF,CC0402KRX7R9BB102,C106205,
+电容品格,R5,,4.7kΩ,FRC0402F4701TS,C2906869,
+电容品格,C9,,,,,
+电容品格,C10,,,,,
+电容品格,L1,,,BLM18SP601SZ1D,C1019082,
+电容品格,C16,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C17,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C18,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,R6,,10kΩ,FRC0402F1002TS,C2906861,
+电容品格,U12,,,AD7147ACPZ-500RL7,C207411,
+电容品格,U11,,,OPA320AIDBVR,C92494,
+电容品格,R7,,33Ω,RC0402FR-0733RL,C138002,
+电容品格,C19,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C20,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C21,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,R8,,10kΩ,FRC0402F1002TS,C2906861,
+电容品格,U14,,,AD7147ACPZ-500RL7,C207411,
+电容品格,U13,,,OPA320AIDBVR,C92494,
+电容品格,R9,,33Ω,RC0402FR-0733RL,C138002,
+电容品格,C22,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C23,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C24,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,R10,,10kΩ,FRC0402F1002TS,C2906861,
+电容品格,U16,,,AD7147ACPZ-500RL7,C207411,
+电容品格,U15,,,OPA320AIDBVR,C92494,
+电容品格,R11,,33Ω,RC0402FR-0733RL,C138002,
+电容品格,C25,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C26,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C27,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,R12,,10kΩ,FRC0402F1002TS,C2906861,
+电容品格,U18,,,AD7147ACPZ-500RL7,C207411,
+电容品格,U17,,,OPA320AIDBVR,C92494,
+电容品格,R13,,33Ω,RC0402FR-0733RL,C138002,
+电容品格,C28,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C29,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C30,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,R14,,10kΩ,FRC0402F1002TS,C2906861,
+电容品格,U20,,,AD7147ACPZ-500RL7,C207411,
+电容品格,U19,,,OPA320AIDBVR,C92494,
+电容品格,R15,,33Ω,RC0402FR-0733RL,C138002,
+电容品格,C31,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C32,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,C33,,100nF,CC0402JRX7R7BB104,C541464,
+电容品格,R16,,10kΩ,FRC0402F1002TS,C2906861,
+电容品格,U22,,,AD7147ACPZ-500RL7,C207411,
+电容品格,U21,,,OPA320AIDBVR,C92494,
+电容品格,R17,,33Ω,RC0402FR-0733RL,C138002,
+电容品格,CN1,,,,,
+电容品格,LED1,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED2,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED3,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED4,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED5,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED6,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED9,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,SCREW1,,,,,
+电容品格,SCREW2,,,,,
+电容品格,SCREW3,,,,,
+电容品格,SCREW4,,,,,
+电容品格,R18,,,,,
+电容品格,R19,,,,,
+电容品格,R20,,,,,
+电容品格,LED16,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED17,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED10,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED11,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED12,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED13,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED14,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED15,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED18,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED25,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED26,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED19,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED20,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED21,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED22,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED23,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED24,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED27,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED34,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED35,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED28,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED29,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED30,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED31,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED32,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED33,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED36,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED43,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED44,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED37,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED38,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED39,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED40,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED41,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED42,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED45,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED52,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED53,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED46,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED47,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED48,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED49,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED50,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED51,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED54,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED61,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED62,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED55,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED56,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED57,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED58,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED59,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED60,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED63,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED70,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED71,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED64,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED65,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED66,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED67,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED68,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED69,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,LED72,={Manufacturer Part},,XL-1005UWC,C20613596,03d8be6be6dbf999
+电容品格,R21,,,,,

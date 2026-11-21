@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gowin-fpga-project>
+<Project>
+    <Template>FPGA</Template>
+    <Version>5</Version>
+    <Device name="GW5A-25A" pn="GW5A-LV25MG121NC1/I0">gw5a25a-002</Device>
+    <FileList>
+        <File path="src/ad7147_i2c.v" type="file.verilog" enable="1"/>
+        <File path="src/ad7147_spi.v" type="file.verilog" enable="1"/>
+        <File path="src/spi_master.v" type="file.verilog" enable="1"/>
+        <!-- 光电拨弦链（从 06 移植）：ADS7950 采集 + 四路凹坑检测 -->
+        <File path="src/spi_slave_bytes.v" type="file.verilog" enable="1"/>
+        <File path="src/la_capture.v" type="file.verilog" enable="1"/>
+        <File path="src/ads7950_spi.v" type="file.verilog" enable="1"/>
+        <File path="src/capo_pitch.v" type="file.verilog" enable="1"/>
+        <File path="src/audio_fx.v" type="file.verilog" enable="1"/>
+        <File path="src/power_control.v" type="file.verilog" enable="1"/>
+        <File path="src/performance_router.v" type="file.verilog" enable="1"/>
+        <File path="src/opto_velocity.v" type="file.verilog" enable="1"/>
+        <File path="src/strum_detect.v" type="file.verilog" enable="1"/>
+        <File path="src/sensor_reg_if.v" type="file.verilog" enable="1"/>
+        <File path="src/ad7147_scan.v" type="file.verilog" enable="1"/>
+        <File path="src/vibrato_shared.v" type="file.verilog" enable="1"/>
+        <File path="src/vibrato_detect.v" type="file.verilog" enable="1"/>
+        <File path="src/touch_recog.v" type="file.verilog" enable="1"/>
+        <File path="src/ch_map_rom.v" type="file.verilog" enable="1"/>
+        <!-- ★ v45：老 UART 命令链路放回工程（只有 USE_UART_CMD=1 时被实例化；
+             默认 USE_UART_CMD=0 时综合会把它们整体裁掉） -->
+        <File path="src/uart_rx.v" type="file.verilog" enable="1"/>
+        <File path="src/uart_tx.v" type="file.verilog" enable="1"/>
+      <File path="src/telemetry_tx.v" type="file.verilog" enable="1"/>
+        <File path="src/cmd_decoder.v" type="file.verilog" enable="1"/>
+        <File path="src/audio_analyzer.v" type="file.verilog" enable="1"/>
+        <File path="src/additive4_tone.v" type="file.verilog" enable="1"/>
+        <File path="src/tone_rom.v" type="file.verilog" enable="1"/>
+        <File path="src/i2s_tx.v" type="file.verilog" enable="1"/>
+        <File path="src/limiter16.v" type="file.verilog" enable="1"/>
+
+        <File path="src/pitch_ctl.v" type="file.verilog" enable="1"/>
+
+        <File path="src/tick_gen.v" type="file.verilog" enable="1"/>
+        <File path="src/led_profile.v" type="file.verilog" enable="1"/>
+        <File path="src/led_matrix.v" type="file.verilog" enable="1"/>
+        <File path="src/envelope_store.v" type="file.verilog" enable="1"/>
+        <File path="src/top_gv_host.v" type="file.verilog" enable="1"/>
+        <File path="src/pluck_gv.cst" type="file.cst" enable="1"/>
+        <File path="src/pluck_gv.sdc" type="file.sdc" enable="1"/>
+    </FileList>
+</Project>

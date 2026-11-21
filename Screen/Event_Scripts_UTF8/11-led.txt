@@ -1,0 +1,492 @@
+================================================================
+  Page 11 — led（LED 灯阵）
+  物理阵列：4 列 × 18 行；左→右 = SW8、SW9、SW0、SW1
+  协议：AA 17 mode axis speed brightness flags（固定 7 字节）
+================================================================
+
+本页的 72 个灯珠数据不放在屏幕里。屏幕只发送模式、方向、速度、
+亮度和一个可选的引导光标志，ESP32 负责保存到 NVS 并转发到 FPGA。
+
+本页是 320×240 横屏，页面背景 `bco=6306`。建议在 USART HMI 中按
+`docs/11-LED页面搭建明细.md` 的坐标逐项建立控件（控件名必须一致）：
+  b_m0..b_m6（7 个模式按钮）、b_axis、h_speed、h_bri、
+  n_speed、n_bri、t_mode、t_axis、t_speed、t_bri、t_map、t_stat、
+  b_back、tm0。
+  h_speed/h_bri 的范围都设为 0..255，tm0.tim=150、tm0.en=1。
+  工程第一个字库为 `zk16`（属性面板中通常显示 font=0）；文本和按钮
+  的中文初始文字、bco/pco、对齐方式也要按该文档填写。
+
+--------------------------------------------------------
+【后初始化事件 Postinitialize Event】
+--------------------------------------------------------
+h_speed.val=vledspeed
+h_bri.val=vledbri
+n_speed.val=vledspeed
+n_bri.val=vledbri
+
+// 固定按钮文字；这样重新建页或换字库后，脚本仍会恢复正确文案。
+b_m0.txt="关闭"
+b_m1.txt="全部常亮"
+b_m2.txt="全亮呼吸"
+b_m3.txt="渐进呼吸"
+b_m4.txt="游龙往返"
+b_m5.txt="行列波纹"
+b_m6.txt="拨弦跟随"
+t_speed.txt="速度"
+t_bri.txt="亮度"
+t_map.txt="4列×18行"
+
+// 模式按钮：浅木底黑字表示当前选中，其他按钮为深木白字。
+b_m0.bco=22979
+b_m0.pco=65535
+b_m1.bco=22979
+b_m1.pco=65535
+b_m2.bco=22979
+b_m2.pco=65535
+b_m3.bco=22979
+b_m3.pco=65535
+b_m4.bco=22979
+b_m4.pco=65535
+b_m5.bco=22979
+b_m5.pco=65535
+b_m6.bco=22979
+b_m6.pco=65535
+
+if(vledaxis==0)
+{
+  t_axis.txt="方向：行"
+  b_axis.txt="切换到列"
+}
+if(vledaxis==1)
+{
+  t_axis.txt="方向：列"
+  b_axis.txt="切换到行"
+}
+
+if(vledmode==0)
+{
+  t_mode.txt="模式：关闭"
+}
+if(vledmode==1)
+{
+  t_mode.txt="模式：全部常亮"
+}
+if(vledmode==2)
+{
+  t_mode.txt="模式：全亮呼吸"
+}
+if(vledmode==3)
+{
+  t_mode.txt="模式：渐进呼吸"
+}
+if(vledmode==4)
+{
+  t_mode.txt="模式：游龙往返"
+}
+if(vledmode==5)
+{
+  t_mode.txt="模式：行列波纹"
+}
+if(vledmode==6)
+{
+  t_mode.txt="模式：拨弦跟随"
+}
+
+if(vledmode==0)
+{
+  b_m0.bco=56784
+  b_m0.pco=0
+}
+if(vledmode==1)
+{
+  b_m1.bco=56784
+  b_m1.pco=0
+}
+if(vledmode==2)
+{
+  b_m2.bco=56784
+  b_m2.pco=0
+}
+if(vledmode==3)
+{
+  b_m3.bco=56784
+  b_m3.pco=0
+}
+if(vledmode==4)
+{
+  b_m4.bco=56784
+  b_m4.pco=0
+}
+if(vledmode==5)
+{
+  b_m5.bco=56784
+  b_m5.pco=0
+}
+if(vledmode==6)
+{
+  b_m6.bco=56784
+  b_m6.pco=0
+}
+t_stat.txt="已保存设置"
+tm0.en=1
+
+--------------------------------------------------------
+【定时器 tm0 事件】 tim=150、en=1
+--------------------------------------------------------
+// 全局值变化表示收到了外部设置；只在变化时移动滑块，避免拖动时抢回位置。
+if(n_speed.val!=vledspeed)
+{
+  h_speed.val=vledspeed
+}
+if(n_bri.val!=vledbri)
+{
+  h_bri.val=vledbri
+}
+n_speed.val=vledspeed
+n_bri.val=vledbri
+
+// 同步当前模式和方向；这里只回显，不发送 AA 17。
+// 模式按钮：浅木底黑字表示当前选中，其他按钮为深木白字。
+b_m0.bco=22979
+b_m0.pco=65535
+b_m1.bco=22979
+b_m1.pco=65535
+b_m2.bco=22979
+b_m2.pco=65535
+b_m3.bco=22979
+b_m3.pco=65535
+b_m4.bco=22979
+b_m4.pco=65535
+b_m5.bco=22979
+b_m5.pco=65535
+b_m6.bco=22979
+b_m6.pco=65535
+
+if(vledaxis==0)
+{
+  t_axis.txt="方向：行"
+  b_axis.txt="切换到列"
+}
+if(vledaxis==1)
+{
+  t_axis.txt="方向：列"
+  b_axis.txt="切换到行"
+}
+
+if(vledmode==0)
+{
+  t_mode.txt="模式：关闭"
+}
+if(vledmode==1)
+{
+  t_mode.txt="模式：全部常亮"
+}
+if(vledmode==2)
+{
+  t_mode.txt="模式：全亮呼吸"
+}
+if(vledmode==3)
+{
+  t_mode.txt="模式：渐进呼吸"
+}
+if(vledmode==4)
+{
+  t_mode.txt="模式：游龙往返"
+}
+if(vledmode==5)
+{
+  t_mode.txt="模式：行列波纹"
+}
+if(vledmode==6)
+{
+  t_mode.txt="模式：拨弦跟随"
+}
+
+if(vledmode==0)
+{
+  b_m0.bco=56784
+  b_m0.pco=0
+}
+if(vledmode==1)
+{
+  b_m1.bco=56784
+  b_m1.pco=0
+}
+if(vledmode==2)
+{
+  b_m2.bco=56784
+  b_m2.pco=0
+}
+if(vledmode==3)
+{
+  b_m3.bco=56784
+  b_m3.pco=0
+}
+if(vledmode==4)
+{
+  b_m4.bco=56784
+  b_m4.pco=0
+}
+if(vledmode==5)
+{
+  b_m5.bco=56784
+  b_m5.pco=0
+}
+if(vledmode==6)
+{
+  b_m6.bco=56784
+  b_m6.pco=0
+}
+
+
+--------------------------------------------------------
+【按钮 b_m0 弹起事件】
+--------------------------------------------------------
+vledmode=0
+t_mode.txt="模式：关闭"
+b_m0.bco=56784
+b_m0.pco=0
+b_m1.bco=22979
+b_m1.pco=65535
+b_m2.bco=22979
+b_m2.pco=65535
+b_m3.bco=22979
+b_m3.pco=65535
+b_m4.bco=22979
+b_m4.pco=65535
+b_m5.bco=22979
+b_m5.pco=65535
+b_m6.bco=22979
+b_m6.pco=65535
+printh AA 17
+prints vledmode,1
+prints vledaxis,1
+prints vledspeed,1
+prints vledbri,1
+prints vledflags,1
+t_stat.txt="已发送"
+
+--------------------------------------------------------
+【按钮 b_m1 弹起事件】
+--------------------------------------------------------
+vledmode=1
+t_mode.txt="模式：全部常亮"
+b_m0.bco=22979
+b_m0.pco=65535
+b_m1.bco=56784
+b_m1.pco=0
+b_m2.bco=22979
+b_m2.pco=65535
+b_m3.bco=22979
+b_m3.pco=65535
+b_m4.bco=22979
+b_m4.pco=65535
+b_m5.bco=22979
+b_m5.pco=65535
+b_m6.bco=22979
+b_m6.pco=65535
+printh AA 17
+prints vledmode,1
+prints vledaxis,1
+prints vledspeed,1
+prints vledbri,1
+prints vledflags,1
+t_stat.txt="已发送"
+
+--------------------------------------------------------
+【按钮 b_m2 弹起事件】
+--------------------------------------------------------
+vledmode=2
+t_mode.txt="模式：全亮呼吸"
+b_m0.bco=22979
+b_m0.pco=65535
+b_m1.bco=22979
+b_m1.pco=65535
+b_m2.bco=56784
+b_m2.pco=0
+b_m3.bco=22979
+b_m3.pco=65535
+b_m4.bco=22979
+b_m4.pco=65535
+b_m5.bco=22979
+b_m5.pco=65535
+b_m6.bco=22979
+b_m6.pco=65535
+printh AA 17
+prints vledmode,1
+prints vledaxis,1
+prints vledspeed,1
+prints vledbri,1
+prints vledflags,1
+t_stat.txt="已发送"
+
+--------------------------------------------------------
+【按钮 b_m3 弹起事件】
+--------------------------------------------------------
+vledmode=3
+t_mode.txt="模式：渐进呼吸"
+b_m0.bco=22979
+b_m0.pco=65535
+b_m1.bco=22979
+b_m1.pco=65535
+b_m2.bco=22979
+b_m2.pco=65535
+b_m3.bco=56784
+b_m3.pco=0
+b_m4.bco=22979
+b_m4.pco=65535
+b_m5.bco=22979
+b_m5.pco=65535
+b_m6.bco=22979
+b_m6.pco=65535
+printh AA 17
+prints vledmode,1
+prints vledaxis,1
+prints vledspeed,1
+prints vledbri,1
+prints vledflags,1
+t_stat.txt="已发送"
+
+--------------------------------------------------------
+【按钮 b_m4 弹起事件】
+--------------------------------------------------------
+vledmode=4
+t_mode.txt="模式：游龙往返"
+b_m0.bco=22979
+b_m0.pco=65535
+b_m1.bco=22979
+b_m1.pco=65535
+b_m2.bco=22979
+b_m2.pco=65535
+b_m3.bco=22979
+b_m3.pco=65535
+b_m4.bco=56784
+b_m4.pco=0
+b_m5.bco=22979
+b_m5.pco=65535
+b_m6.bco=22979
+b_m6.pco=65535
+printh AA 17
+prints vledmode,1
+prints vledaxis,1
+prints vledspeed,1
+prints vledbri,1
+prints vledflags,1
+t_stat.txt="已发送"
+
+--------------------------------------------------------
+【按钮 b_m5 弹起事件】
+--------------------------------------------------------
+vledmode=5
+t_mode.txt="模式：行列波纹"
+b_m0.bco=22979
+b_m0.pco=65535
+b_m1.bco=22979
+b_m1.pco=65535
+b_m2.bco=22979
+b_m2.pco=65535
+b_m3.bco=22979
+b_m3.pco=65535
+b_m4.bco=22979
+b_m4.pco=65535
+b_m5.bco=56784
+b_m5.pco=0
+b_m6.bco=22979
+b_m6.pco=65535
+printh AA 17
+prints vledmode,1
+prints vledaxis,1
+prints vledspeed,1
+prints vledbri,1
+prints vledflags,1
+t_stat.txt="已发送"
+
+--------------------------------------------------------
+【按钮 b_m6 弹起事件】
+--------------------------------------------------------
+vledmode=6
+t_mode.txt="模式：拨弦跟随"
+b_m0.bco=22979
+b_m0.pco=65535
+b_m1.bco=22979
+b_m1.pco=65535
+b_m2.bco=22979
+b_m2.pco=65535
+b_m3.bco=22979
+b_m3.pco=65535
+b_m4.bco=22979
+b_m4.pco=65535
+b_m5.bco=22979
+b_m5.pco=65535
+b_m6.bco=56784
+b_m6.pco=0
+printh AA 17
+prints vledmode,1
+prints vledaxis,1
+prints vledspeed,1
+prints vledbri,1
+prints vledflags,1
+t_stat.txt="已发送"
+
+--------------------------------------------------------
+【按钮 b_axis 弹起事件】
+--------------------------------------------------------
+if(vledaxis==0)
+{
+  vledaxis=1
+  t_axis.txt="方向：列"
+  b_axis.txt="切换到行"
+}
+else
+{
+  vledaxis=0
+  t_axis.txt="方向：行"
+  b_axis.txt="切换到列"
+}
+printh AA 17
+prints vledmode,1
+prints vledaxis,1
+prints vledspeed,1
+prints vledbri,1
+prints vledflags,1
+t_stat.txt="已发送"
+
+--------------------------------------------------------
+【滑块 h_speed 弹起事件】
+--------------------------------------------------------
+vledspeed=h_speed.val
+printh AA 17
+prints vledmode,1
+prints vledaxis,1
+prints vledspeed,1
+prints vledbri,1
+prints vledflags,1
+t_stat.txt="已发送"
+
+--------------------------------------------------------
+【滑块 h_bri 弹起事件】
+--------------------------------------------------------
+vledbri=h_bri.val
+printh AA 17
+prints vledmode,1
+prints vledaxis,1
+prints vledspeed,1
+prints vledbri,1
+prints vledflags,1
+t_stat.txt="已发送"
+
+--------------------------------------------------------
+【按钮 b_back 弹起事件】
+--------------------------------------------------------
+page main
+
+================================================================
+  模式编号
+================================================================
+  0 关闭             1 全部常亮       2 全亮呼吸
+  3 行/列渐进呼吸    4 行/列游龙       5 行/列波纹
+  6 拨弦跟随（光电事件点亮对应列）
+
+axis=0 时按 CS13、CS14、CS15、CS16、CS17、CS12…CS0 的视觉顺序
+沿 18 行运动；axis=1 时按原理图的 SW8、SW9、SW0、SW1 沿 4 列运动。
+FPGA 会完成这个非连续的电气编号映射，屏幕无需知道寄存器地址。

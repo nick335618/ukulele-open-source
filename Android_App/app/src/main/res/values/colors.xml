@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Ukulele Studio semantic color tokens (frozen names - see docs contract section 1).
+
+  Dark palette is the default set; the light palette uses the identical name plus
+  the "_light" suffix. AppTheme.java mirrors these exact values in code
+  (AppTheme.darkColors() / AppTheme.lightColors()) because the palette must be
+  readable without a Context. When a value changes here, change it there too.
+
+  Do not rename anything: MainActivity, styles.xml and the custom views resolve
+  these by name.
+-->
+<resources>
+
+    <!-- ===================== dark palette (default) ===================== -->
+    <color name="bg_root">#070D18</color>
+    <color name="bg_surface">#101A2C</color>
+    <color name="bg_surface_2">#17263C</color>
+    <color name="bg_surface_3">#1F3149</color>
+    <color name="bg_surface_4">#27405F</color>
+
+    <color name="stroke">#22344F</color>
+    <color name="stroke_strong">#2E4662</color>
+
+    <color name="text_primary">#F1F6FC</color>
+    <color name="text_secondary">#A7BAD3</color>
+    <color name="text_tertiary">#6E86A6</color>
+
+    <color name="accent">#36DAD4</color>
+    <color name="accent_dim">#0E4F58</color>
+    <color name="accent_soft">#123C44</color>
+
+    <color name="warn">#FFC152</color>
+    <color name="danger">#FF7070</color>
+    <color name="success">#36EBA6</color>
+
+    <color name="led_on">#FFC152</color>
+    <color name="led_off">#2A3D57</color>
+
+    <!-- ===================== light palette (suffix _light) ===================== -->
+    <color name="bg_root_light">#F4F7FB</color>
+    <color name="bg_surface_light">#FFFFFF</color>
+    <color name="bg_surface_2_light">#EDF2F8</color>
+    <color name="bg_surface_3_light">#E2EAF4</color>
+    <color name="bg_surface_4_light">#D6E0EC</color>
+
+    <color name="stroke_light">#D6E0EC</color>
+    <color name="stroke_strong_light">#C3D0E0</color>
+
+    <color name="text_primary_light">#0C1726</color>
+    <color name="text_secondary_light">#4C6180</color>
+    <color name="text_tertiary_light">#6E86A6</color>
+
+    <!-- accent_light/led_on_light/led_off_light were darkened after a contrast audit:
+         the first draft values (#0FA9A3 / #D98A00 / #C9D6E4) sat at 2.77-2.91:1 on the
+         light surfaces, below the WCAG 3:1 bar for graphical elements. -->
+    <color name="accent_light">#0B807B</color>
+    <color name="accent_dim_light">#A9E6E2</color>
+    <color name="accent_soft_light">#DCF5F3</color>
+
+    <color name="warn_light">#B4761A</color>
+    <color name="danger_light">#C4342F</color>
+    <color name="success_light">#12855A</color>
+
+    <color name="led_on_light">#A66A00</color>
+    <color name="led_off_light">#A9BACD</color>
+
+    <!-- launcher adaptive-icon background layer (do not remove) -->
+    <color name="icon_background">#061225</color>
+
+</resources>

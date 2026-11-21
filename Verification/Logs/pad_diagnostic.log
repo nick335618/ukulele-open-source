@@ -1,0 +1,2 @@
+PASS v1/v2 diagnostic frame, 97-channel boundary, raw values, vibrato gate/owner/threshold, CRC, no pluck injection
+D:\ukulele_handoff\OpenSource_20261121\Repository\Verification\Tests\pad_diagnostic_tb.sv:41: $finish called at 14520000 (1ps)

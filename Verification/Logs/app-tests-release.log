@@ -1,0 +1,83 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for local.ukulele:practice-flow-check:jar:1
+[WARNING] 'dependencies.dependency.systemPath' for local:app:jar should not point at files within the project directory, ${project.basedir}/lib/compiled-classes.jar will be unresolvable by dependent projects @ line 6, column 118
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] -----------------< local.ukulele:practice-flow-check >------------------
+[INFO] Building practice-flow-check 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ practice-flow-check ---
+[INFO] skip non existing resourceDirectory D:\ukulele_handoff\debug\2026-11-13-playback\app-test\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ practice-flow-check ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ practice-flow-check ---
+[INFO] skip non existing resourceDirectory D:\ukulele_handoff\debug\2026-11-13-playback\app-test\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ practice-flow-check ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 15 source files with javac [debug target 8] to target\test-classes
+[WARNING] δ�� -source 8 һ������������·��
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ practice-flow-check ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junit4.JUnit4Provider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.ukulele.monitor.AnalysisTransportTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.126 s -- in com.ukulele.monitor.AnalysisTransportTest
+[INFO] Running com.ukulele.monitor.AppRefinementTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.74 s -- in com.ukulele.monitor.AppRefinementTest
+[INFO] Running com.ukulele.monitor.AudioUpgradeTest
+No package ID 7f found for ID 0x7f040007.
+No package ID 7f found for ID 0x7f040008.
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.012 s -- in com.ukulele.monitor.AudioUpgradeTest
+[INFO] Running com.ukulele.monitor.CapoInteractionTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.879 s -- in com.ukulele.monitor.CapoInteractionTest
+[INFO] Running com.ukulele.monitor.ConnectionQueueTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.ukulele.monitor.ConnectionQueueTest
+[INFO] Running com.ukulele.monitor.CreativeUiTest
+No package ID 7f found for ID 0x7f040007.
+No package ID 7f found for ID 0x7f040008.
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.875 s -- in com.ukulele.monitor.CreativeUiTest
+[INFO] Running com.ukulele.monitor.DirectControlTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.420 s -- in com.ukulele.monitor.DirectControlTest
+[INFO] Running com.ukulele.monitor.GestureSourceTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.ukulele.monitor.GestureSourceTest
+[INFO] Running com.ukulele.monitor.InstrumentPlaybackTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.270 s -- in com.ukulele.monitor.InstrumentPlaybackTest
+[INFO] Running com.ukulele.monitor.MidiOctaveTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.743 s -- in com.ukulele.monitor.MidiOctaveTest
+[INFO] Running com.ukulele.monitor.PlaybackFixTest
+Chengdu 365 attacks preserved, default columns=[3], balanced columns=[0, 1, 2, 3]
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.776 s -- in com.ukulele.monitor.PlaybackFixTest
+[INFO] Running com.ukulele.monitor.PracticeFlowTest
+No package ID 7f found for ID 0x7f040007.
+No package ID 7f found for ID 0x7f040008.
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.148 s -- in com.ukulele.monitor.PracticeFlowTest
+[INFO] Running com.ukulele.monitor.RecorderRecoveryTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.328 s -- in com.ukulele.monitor.RecorderRecoveryTest
+[INFO] Running com.ukulele.monitor.ScopeRenderTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.920 s -- in com.ukulele.monitor.ScopeRenderTest
+[INFO] Running com.ukulele.monitor.VibratoSettingsTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.503 s -- in com.ukulele.monitor.VibratoSettingsTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 80, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  46.644 s
+[INFO] Finished at: 2026-11-13T02:28:24+08:00
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,24 @@
+[1/6] aapt2 compile resources
+[2/6] aapt2 link resources and manifest
+[3/6] javac compile Java sources
+  [javac] ע: ĳЩ�����ļ�ʹ�û򸲸����ѹ�ʱ�� API��
+  [javac] ע: �й���ϸ��Ϣ, ��ʹ�� -Xlint:deprecation ���±��롣
+      produced 443 class files
+[4/6] d8 dex conversion
+      native ABIs: arm64-v8a  (9.7 MB)
+      skipped    : armeabi, armeabi-v7a, mips, mips64, x86, x86_64
+      canonical APK entry names: 75
+[5/6] zipalign
+[6/6] sign and verify
+  [apksigner verify] Verifies
+  [apksigner verify] Verified using v1 scheme (JAR signing): false
+  [apksigner verify] Verified using v2 scheme (APK Signature Scheme v2): true
+  [apksigner verify] Verified using v3 scheme (APK Signature Scheme v3): true
+  [apksigner verify] Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+  [apksigner verify] Verified using v4 scheme (APK Signature Scheme v4): false
+  [apksigner verify] Verified for SourceStamp: false
+  [apksigner verify] Number of signers: 1
+
+BUILD OK  v3.19.12 (versionCode 90)
+APK      : D:\ukulele_handoff\debug\2026-11-13-playback\apk-build\ukulele-monitor-debug.apk  (49,309,284 bytes)
+In project: D:\ukulele_handoff\debug\2026-11-13-playback\Android_App\build\outputs\apk\debug\UkuleleStudio-v3.19.12-debug.apk

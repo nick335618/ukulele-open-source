@@ -1,0 +1,21 @@
+# Preserve the delivered source and ROM bytes across operating systems.
+* -text
+*.hex -text
+*.fs binary
+*.bin binary
+*.apk binary
+*.HMI binary
+*.tft binary
+*.epro2 binary
+*.eprj2 binary
+*.SLDPRT binary
+*.SLDASM binary
+*.STEP binary
+*.webp binary
+*.png binary
+*.jpg binary
+*.jar binary
+*.so binary
+*.zip binary
+*.pdf binary
+*.docx binary

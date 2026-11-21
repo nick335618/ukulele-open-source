@@ -1,0 +1,60 @@
+plugins { id 'com.android.application' }
+
+
+
+
+
+android {
+
+
+    namespace 'com.ukulele.monitor'
+
+
+    compileSdk 34
+
+
+
+
+
+    defaultConfig {
+
+
+        applicationId 'com.ukulele.monitor'
+
+
+        minSdk 26
+
+
+        targetSdk 34
+
+
+        versionCode 90
+
+
+        versionName '3.19.12'
+
+
+    }
+
+
+
+
+
+    compileOptions {
+
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+
+
+        targetCompatibility JavaVersion.VERSION_1_8
+
+
+    }
+
+
+}
+
+
+
+dependencies { implementation fileTree(dir: 'libs', include: ['*.jar']) }
+

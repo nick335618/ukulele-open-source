@@ -1,0 +1,366 @@
+保存与恢复页：调节即时生效，真实保存成功后才断电保留。
+读取、保存、载入、临时默认、默认并保存均使用新1A协议。
+临时默认只改光电参数，保留演奏模式。默认并保存还恢复一拍锁定。
+新增/调整控件坐标见 docs/12-演奏模式控件与更新.md。
+
+--------------------------------------------------------
+【后初始化事件 Postinitialize Event】
+--------------------------------------------------------
+vstage=0
+vopage=0
+vcfm=0
+vbeatLast=vbeat
+vbeatAge=0
+s_st.txt="等待实际操作结果"
+tm0.en=1
+
+--------------------------------------------------------
+【定时器 tm0 事件 tim=200、en=1】
+--------------------------------------------------------
+printh AA 0B
+prints vseq,1
+vseq=vseq+1
+if(vseq>255)
+{
+  vseq=0
+}
+if(vbeat!=vbeatLast)
+{
+  vbeatLast=vbeat
+  vbeatAge=0
+  vlink=1
+}else
+{
+  vbeatAge=vbeatAge+1
+  if(vbeatAge>15)
+  {
+    vlink=0
+  }
+}
+// FPGA实际模式与串口心跳分开显示。
+if(vlink==0)
+{
+  vfpga=0
+  vev=0
+  vdet=0
+  vacc=0
+  vemit=0
+}
+if(vfpga==1)
+{
+  t_fpga.txt="FPGA：在线"
+  t_fpga.pco=2016
+}else
+{
+  t_fpga.txt="FPGA：离线"
+  t_fpga.pco=63488
+}
+t_pm.pco=65504
+if(vpmode==255)
+{
+  t_pm.txt="等待模式回读"
+}
+if(vpmode==0)
+{
+  t_pm.txt="实际：一拍锁定"
+  t_pm.pco=2016
+}
+if(vpmode==1)
+{
+  t_pm.txt="实际：四弦复音"
+  t_pm.pco=2016
+}
+// 模式状态显示请求结果；t_pm继续显示FPGA实际值。
+if(vfpga==1)
+{
+  if(voptype==7)
+  {
+    if(vopstatus==1)
+    {
+      t_fpga.txt="模式待确认"
+      t_fpga.pco=65504
+    }
+    if(vopstatus==3)
+    {
+      t_fpga.txt="模式失败"
+      t_fpga.pco=63488
+    }
+    if(vopstatus==4)
+    {
+      t_fpga.txt="模式超时"
+      t_fpga.pco=63488
+    }
+    if(vopstatus==6)
+    {
+      t_fpga.txt="设备忙"
+      t_fpga.pco=63488
+    }
+  }
+}
+if(vfpga==0)
+{
+  t_pm.txt="实际模式未知"
+  t_pm.pco=63488
+}
+s_st.pco=65504
+if(vopstatus==1)
+{
+  s_st.txt="等待FPGA实际确认"
+  vopage=vopage+1
+  if(vopage>15)
+  {
+    s_st.txt="未收到匹配结果：超时"
+    s_st.pco=63488
+  }
+}
+if(vopack==vreqseq)
+{
+  if(voptype==vopr)
+  {
+    if(vopstatus==2)
+    {
+      s_st.txt="操作成功"
+      s_st.pco=2016
+      if(vopr==3)
+      {
+        s_st.txt="配置和模式已校验保存"
+      }
+      if(vopr==4)
+      {
+        s_st.txt="已载入并经FPGA确认"
+      }
+      if(vopr==5)
+      {
+        s_st.txt="临时默认：未保存"
+      }
+      if(vopr==6)
+      {
+        s_st.txt="默认和锁定模式已保存"
+      }
+    }
+    if(vopstatus==3)
+    {
+      s_st.txt="操作失败：参数或存储错误"
+      s_st.pco=63488
+    }
+    if(vopstatus==4)
+    {
+      s_st.txt="FPGA回读超时：未确认"
+      s_st.pco=63488
+    }
+    if(vopstatus==5)
+    {
+      s_st.txt="FPGA离线：操作未完成"
+      s_st.pco=63488
+    }
+    if(vopstatus==6)
+    {
+      s_st.txt="设备忙：稍后重试"
+      s_st.pco=63488
+    }
+  }
+}
+
+
+--------------------------------------------------------
+【按钮 s_read 弹起事件】
+--------------------------------------------------------
+vopr=1
+voch=0
+vval=0
+// 新协议1A：序号在校验范围内，独立于实时刷新心跳序号。
+vopseq=vopseq+1
+if(vopseq>127)
+{
+  vopseq=0
+}
+vreqseq=vopseq
+vlo=vval%256
+vmid=vval/256
+vmid=vmid%256
+vhi=vval/65536
+vhi=vhi%256
+vcrc=26
+vcrc=vcrc^6
+vcrc=vcrc^vopr
+vcrc=vcrc^voch
+vcrc=vcrc^vlo
+vcrc=vcrc^vmid
+vcrc=vcrc^vhi
+vcrc=vcrc^vreqseq
+vopstatus=1
+vopage=0
+printh AA 1A 06
+prints vopr,1
+prints voch,1
+prints vlo,1
+prints vmid,1
+prints vhi,1
+prints vreqseq,1
+prints vcrc,1
+
+
+--------------------------------------------------------
+【按钮 s_save 弹起事件】
+--------------------------------------------------------
+vopr=3
+voch=0
+vval=0
+// 新协议1A：序号在校验范围内，独立于实时刷新心跳序号。
+vopseq=vopseq+1
+if(vopseq>127)
+{
+  vopseq=0
+}
+vreqseq=vopseq
+vlo=vval%256
+vmid=vval/256
+vmid=vmid%256
+vhi=vval/65536
+vhi=vhi%256
+vcrc=26
+vcrc=vcrc^6
+vcrc=vcrc^vopr
+vcrc=vcrc^voch
+vcrc=vcrc^vlo
+vcrc=vcrc^vmid
+vcrc=vcrc^vhi
+vcrc=vcrc^vreqseq
+vopstatus=1
+vopage=0
+printh AA 1A 06
+prints vopr,1
+prints voch,1
+prints vlo,1
+prints vmid,1
+prints vhi,1
+prints vreqseq,1
+prints vcrc,1
+
+
+--------------------------------------------------------
+【按钮 s_load 弹起事件】
+--------------------------------------------------------
+vopr=4
+voch=0
+vval=0
+// 新协议1A：序号在校验范围内，独立于实时刷新心跳序号。
+vopseq=vopseq+1
+if(vopseq>127)
+{
+  vopseq=0
+}
+vreqseq=vopseq
+vlo=vval%256
+vmid=vval/256
+vmid=vmid%256
+vhi=vval/65536
+vhi=vhi%256
+vcrc=26
+vcrc=vcrc^6
+vcrc=vcrc^vopr
+vcrc=vcrc^voch
+vcrc=vcrc^vlo
+vcrc=vcrc^vmid
+vcrc=vcrc^vhi
+vcrc=vcrc^vreqseq
+vopstatus=1
+vopage=0
+printh AA 1A 06
+prints vopr,1
+prints voch,1
+prints vlo,1
+prints vmid,1
+prints vhi,1
+prints vreqseq,1
+prints vcrc,1
+
+
+--------------------------------------------------------
+【按钮 s_default 弹起事件】
+--------------------------------------------------------
+vopr=5
+voch=0
+vval=0
+// 新协议1A：序号在校验范围内，独立于实时刷新心跳序号。
+vopseq=vopseq+1
+if(vopseq>127)
+{
+  vopseq=0
+}
+vreqseq=vopseq
+vlo=vval%256
+vmid=vval/256
+vmid=vmid%256
+vhi=vval/65536
+vhi=vhi%256
+vcrc=26
+vcrc=vcrc^6
+vcrc=vcrc^vopr
+vcrc=vcrc^voch
+vcrc=vcrc^vlo
+vcrc=vcrc^vmid
+vcrc=vcrc^vhi
+vcrc=vcrc^vreqseq
+vopstatus=1
+vopage=0
+printh AA 1A 06
+prints vopr,1
+prints voch,1
+prints vlo,1
+prints vmid,1
+prints vhi,1
+prints vreqseq,1
+prints vcrc,1
+
+
+--------------------------------------------------------
+【按钮 s_fact 弹起事件】
+--------------------------------------------------------
+if(vcfm==0)
+{
+  vcfm=1
+  s_st.txt="再按一次确认覆盖启动配置"
+}else
+{
+  vcfm=0
+vopr=6
+voch=0
+vval=0
+// 新协议1A：序号在校验范围内，独立于实时刷新心跳序号。
+vopseq=vopseq+1
+if(vopseq>127)
+{
+  vopseq=0
+}
+vreqseq=vopseq
+vlo=vval%256
+vmid=vval/256
+vmid=vmid%256
+vhi=vval/65536
+vhi=vhi%256
+vcrc=26
+vcrc=vcrc^6
+vcrc=vcrc^vopr
+vcrc=vcrc^voch
+vcrc=vcrc^vlo
+vcrc=vcrc^vmid
+vcrc=vcrc^vhi
+vcrc=vcrc^vreqseq
+vopstatus=1
+vopage=0
+printh AA 1A 06
+prints vopr,1
+prints voch,1
+prints vlo,1
+prints vmid,1
+prints vhi,1
+prints vreqseq,1
+prints vcrc,1
+}
+
+
+--------------------------------------------------------
+【按钮 s_back 弹起事件】
+--------------------------------------------------------
+page opt

@@ -1,0 +1,11 @@
+{
+  "source_files_identical": 317,
+  "private_keys_included": false,
+  "developer_api_key": "empty placeholder",
+  "secret_pattern_findings": 0,
+  "source_file_limit_ok": true,
+  "private_imported_midi_excluded": true,
+  "video_and_original_CAD": "release assets",
+  "software": "3.19.12 / FPGA8D36",
+  "PCB": "2026-11-21 export"
+}

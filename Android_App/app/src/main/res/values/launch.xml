@@ -1,0 +1,12 @@
+<resources>
+    <color name="launch_surface">#101B29</color>
+    <bool name="launch_light_bars">false</bool>
+    <style name="LaunchBase" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/launch_window</item>
+        <item name="android:statusBarColor">@color/launch_surface</item>
+        <item name="android:navigationBarColor">@color/launch_surface</item>
+        <item name="android:windowLightStatusBar">@bool/launch_light_bars</item>
+        <item name="android:windowLightNavigationBar">@bool/launch_light_bars</item>
+    </style>
+    <style name="LaunchTheme" parent="LaunchBase"/>
+</resources>

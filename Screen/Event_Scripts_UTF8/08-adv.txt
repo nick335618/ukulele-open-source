@@ -1,0 +1,439 @@
+================================================================
+  Page 7 — adv（高级参数，共 9 项）  ★ 新增
+  控件清单：docs/02-控件清单.md 第 8 节
+  协议：docs/01-协议设计.md §2（pid 表，pid 8~16）
+================================================================
+
+9 项参数的量程差了 4000 倍（margin 0~255，blank 0~1048575），
+所以滑块**统一用百分比**：`a_h.val` 0~100 表示"该项上限的百分之几"，
+真实值 = `a_h.val * vamax / 100`，由 `a_val` 显示真实值。
+
+★ pid / 量程对照
+    a_a0 慢基线      pid  8   vamax=1048575
+    a_a1 快基线      pid  9   vamax=1048575
+    a_a2 共模（锁定）    pid 10   vamax=262143
+    a_a3 跨弦（锁定）    pid 11   vamax=255
+    a_a4 持续判定    pid 12   vamax=255
+    a_a5 冷却        pid 13   vamax=65535
+    a_a6 上电消隐    pid 14   vamax=1048575
+    a_a7 重新武装    pid 15   vamax=65535
+    a_a8 首事件锁定  pid 16   vamax=1048575   ★ 读不回来
+
+--------------------------------------------------------
+【后初始化事件 Postinitialize Event】   ← 页面空白处 → 事件面板「后初始化事件」
+--------------------------------------------------------
+vsel=0
+vamax=1048575
+vlsel=9          // 逼定时器第一拍做一次完整刷新
+// 进页面先把心跳同步一次，别第一拍就误判离线
+vbeatLast=vbeat
+vbeatAge=0
+vstage=0
+tm0.en=1
+
+
+--------------------------------------------------------
+【定时器 tm0 事件】  tim=200, en=1   ← 单击选中 tm0 控件 → 事件面板「定时器事件」
+--------------------------------------------------------
+// FPGA实际模式与串口心跳分开显示。
+if(vlink==0)
+{
+  vfpga=0
+  vev=0
+  vdet=0
+  vacc=0
+  vemit=0
+}
+if(vfpga==1)
+{
+  t_fpga.txt="FPGA：在线"
+  t_fpga.pco=2016
+}else
+{
+  t_fpga.txt="FPGA：离线"
+  t_fpga.pco=63488
+}
+t_pm.pco=65504
+if(vpmode==255)
+{
+  t_pm.txt="等待模式回读"
+}
+if(vpmode==0)
+{
+  t_pm.txt="实际：一拍锁定"
+  t_pm.pco=2016
+}
+if(vpmode==1)
+{
+  t_pm.txt="实际：四弦复音"
+  t_pm.pco=2016
+}
+// 模式状态显示请求结果；t_pm继续显示FPGA实际值。
+if(vfpga==1)
+{
+  if(voptype==7)
+  {
+    if(vopstatus==1)
+    {
+      t_fpga.txt="模式待确认"
+      t_fpga.pco=65504
+    }
+    if(vopstatus==3)
+    {
+      t_fpga.txt="模式失败"
+      t_fpga.pco=63488
+    }
+    if(vopstatus==4)
+    {
+      t_fpga.txt="模式超时"
+      t_fpga.pco=63488
+    }
+    if(vopstatus==6)
+    {
+      t_fpga.txt="设备忙"
+      t_fpga.pco=63488
+    }
+  }
+}
+if(vfpga==0)
+{
+  t_pm.txt="实际模式未知"
+  t_pm.pco=63488
+}
+
+
+// ===== ① 选中项变化时，做一次完整刷新 =====
+if(vsel!=vlsel)
+{
+  vlsel=vsel
+
+  // ---- 定 pid / 量程 / 中文名 ----
+  if(vsel==0)
+  {
+    vapid=8
+    vamax=1048575
+    a_sel.txt="当前项：慢基线"
+  }
+  if(vsel==1)
+  {
+    vapid=9
+    vamax=1048575
+    a_sel.txt="当前项：快基线"
+  }
+  if(vsel==2)
+  {
+    vapid=10
+    vamax=262143
+    a_sel.txt="当前项：共模（锁定）"
+  }
+  if(vsel==3)
+  {
+    vapid=11
+    vamax=255
+    a_sel.txt="当前项：跨弦（锁定）"
+  }
+  if(vsel==4)
+  {
+    vapid=12
+    vamax=255
+    a_sel.txt="当前项：持续判定"
+  }
+  if(vsel==5)
+  {
+    vapid=13
+    vamax=65535
+    a_sel.txt="当前项：冷却"
+  }
+  if(vsel==6)
+  {
+    vapid=14
+    vamax=1048575
+    a_sel.txt="当前项：上电消隐"
+  }
+  if(vsel==7)
+  {
+    vapid=15
+    vamax=65535
+    a_sel.txt="当前项：重新武装"
+  }
+  if(vsel==8)
+  {
+    vapid=16
+    vamax=1048575
+    a_sel.txt="当前项：首事件锁定"
+  }
+
+  // ---- 9 个按钮的高亮 ----
+  a_a0.bco=22979
+  a_a0.pco=65535
+  a_a1.bco=22979
+  a_a1.pco=65535
+  a_a2.bco=22979
+  a_a2.pco=65535
+  a_a3.bco=22979
+  a_a3.pco=65535
+  a_a4.bco=22979
+  a_a4.pco=65535
+  a_a5.bco=22979
+  a_a5.pco=65535
+  a_a6.bco=22979
+  a_a6.pco=65535
+  a_a7.bco=22979
+  a_a7.pco=65535
+  a_a8.bco=22979
+  a_a8.pco=65535
+  if(vsel==0)
+  {
+    a_a0.bco=56784
+    a_a0.pco=0
+  }
+  if(vsel==1)
+  {
+    a_a1.bco=56784
+    a_a1.pco=0
+  }
+  if(vsel==2)
+  {
+    a_a2.bco=56784
+    a_a2.pco=0
+  }
+  if(vsel==3)
+  {
+    a_a3.bco=56784
+    a_a3.pco=0
+  }
+  if(vsel==4)
+  {
+    a_a4.bco=56784
+    a_a4.pco=0
+  }
+  if(vsel==5)
+  {
+    a_a5.bco=56784
+    a_a5.pco=0
+  }
+  if(vsel==6)
+  {
+    a_a6.bco=56784
+    a_a6.pco=0
+  }
+  if(vsel==7)
+  {
+    a_a7.bco=56784
+    a_a7.pco=0
+  }
+  if(vsel==8)
+  {
+    a_a8.bco=56784
+    a_a8.pco=0
+  }
+
+  // ---- 从镜像取当前值 ----
+  //   ★ pid 16 的镜像就是 vp16（固件不回读它，屏侧自己维护）
+  if(vsel==0)
+  {
+    vcur=vp8
+  }
+  if(vsel==1)
+  {
+    vcur=vp9
+  }
+  if(vsel==2)
+  {
+    vcur=vp10
+  }
+  if(vsel==3)
+  {
+    vcur=vp11
+  }
+  if(vsel==4)
+  {
+    vcur=vp12
+  }
+  if(vsel==5)
+  {
+    vcur=vp13
+  }
+  if(vsel==6)
+  {
+    vcur=vp14
+  }
+  if(vsel==7)
+  {
+    vcur=vp15
+  }
+  if(vsel==8)
+  {
+    vcur=vp16
+  }
+  a_val.val=vcur
+
+  // 百分比 → 滑块位置：vcur*100/vamax 左到右 = (vcur*100)/vamax
+  a_h.val=vcur*100/vamax
+}
+
+// ===== ② 范围提示 =====
+//   拼字符串必须用 covx（t_tmp 是本页的屏外中转文本控件，页面私有）
+if(vamax!=vt0)
+{
+  vt0=vamax
+  a_rng.txt="范围 0 ~ "
+  covx vamax,t_tmp.txt,0,0
+  a_rng.txt=a_rng.txt+t_tmp.txt
+}
+
+// ===== ③ 发送段：先写参数，再请求回读 =====
+if(vstage==1)
+{
+// 新协议1A：序号在校验范围内，独立于实时刷新心跳序号。
+vopseq=vopseq+1
+if(vopseq>127)
+{
+  vopseq=0
+}
+vreqseq=vopseq
+vlo=vval%256
+vmid=vval/256
+vmid=vmid%256
+vhi=vval/65536
+vhi=vhi%256
+vcrc=26
+vcrc=vcrc^6
+vcrc=vcrc^vopr
+vcrc=vcrc^voch
+vcrc=vcrc^vlo
+vcrc=vcrc^vmid
+vcrc=vcrc^vhi
+vcrc=vcrc^vreqseq
+vopstatus=1
+vopage=0
+printh AA 1A 06
+prints vopr,1
+prints voch,1
+prints vlo,1
+prints vmid,1
+prints vhi,1
+prints vreqseq,1
+prints vcrc,1
+  vstage=0
+}
+
+
+
+// ===== ④ 请求一帧实时数据（维持链路）=====
+printh AA 0B
+prints vseq,1
+vseq=vseq+1
+if(vseq>255)
+{
+  vseq=0
+}
+
+// ===== 链路判断（和 main / opt 页同一套）=====
+//   读数连续 30 拍没变 => 认为下位机没在发数据
+// ESP32 每收到一次 AA 0B 就把 vbeat 写成新值
+if(vbeat!=vbeatLast)
+{
+  vbeatLast=vbeat
+  vbeatAge=0
+  vlink=1
+}else
+{
+  vbeatAge=vbeatAge+1
+  if(vbeatAge>15)
+  {
+    vlink=0
+  }
+}
+if(vlink==1)
+{
+  a_lk.txt="在线"
+  a_lk.bco=22979
+  a_lk.pco=2016
+}else
+{
+  a_lk.txt="离线"
+  a_lk.bco=63488
+  a_lk.pco=0
+}
+
+
+--------------------------------------------------------
+【9 个参数按钮 a_a0 ~ a_a8 弹起事件】
+--------------------------------------------------------
+// a_a0 → 慢基线        vsel=0
+// a_a1 → 快基线        vsel=1
+// a_a2 → 共模（锁定）      vsel=2
+// a_a3 → 跨弦（锁定）      vsel=3
+// a_a4 → 持续判定      vsel=4
+// a_a5 → 冷却          vsel=5
+// a_a6 → 上电消隐      vsel=6
+// a_a7 → 重新武装      vsel=7
+// a_a8 → 首事件锁定    vsel=8
+//
+// ★ 每个按钮的事件里只写一行 `vsel=N`，
+//   其余全部交给定时器的第 ① 步处理。这是本页最省事也最不容易错的做法。
+
+
+--------------------------------------------------------
+【滑块 a_h 弹起事件】 codesup —— 改当前项
+--------------------------------------------------------
+// 百分比 → 真实值：a_h.val*vamax/100 左到右 = (a_h.val*vamax)/100
+// ★ 不要写 a_h.val*vamax/100 之外的形式，也不要加括号
+vval=a_h.val*vamax/100
+a_val.val=vval
+
+// 不修改vp实际镜像，拖动值只在a_val显示待确认目标。
+vopr=0
+voch=vapid
+vstage=1
+
+
+--------------------------------------------------------
+【按钮 a_all 弹起事件】 codesup —— 全部回读
+--------------------------------------------------------
+// op=1：ESP32 发 0x0B → FPGA 回 0x86 → vp0..vp15 全部刷新
+vopr=1
+voch=0
+vval=0
+vstage=1
+
+
+--------------------------------------------------------
+【按钮 a_back 弹起事件】 codesup
+--------------------------------------------------------
+page opt
+
+
+================================================================
+  说明
+================================================================
+
+1. ★★ 为什么滑块用百分比而不是真实量程？
+   这 9 项量程从 255 到 1048575，差 4000 倍。
+   若滑块直接用真实量程，`blank` 的 304 px 跨 1048576
+   => 约 3450 单位/像素，根本没法调。
+   用百分比后 9 项的手感完全一致。
+
+   换算两个方向：
+     滑块 → 真实值：  vval=a_h.val*vamax/100
+     真实值 → 滑块：  a_h.val=vcur*100/vamax
+   （两种写法左到右求值都正好是想要的，**不要加括号**）
+
+2. ★ 这 9 项**普通演奏者不需要动** —— 四档预设会自动把它们设好。
+   这一页是给调试用的。可以在页面底部加一句提示
+  （但会多占 RAM，见 docs/02 第 12 节，按需加）。
+
+3. ★ pid 16（首事件锁定）**读不回来**：
+   FPGA 的 0x86 参数帧只覆盖 pid 0~15。
+   所以 `vp16` 是**屏侧自己维护**的镜像：
+   · 进本页时它的值是 preset 页/本页留下的值
+   · 本页滑块拖动时同步更新它
+   · 与 preset 页共用同一个变量，不要各存一份
+
+4. 第 ② 步用 `vamax != vt0` 做变化判断，避免每拍重建字符串
+  （重建会触发一次文字重绘，会闪）。
+
+5. 本页需要显示的中文：高级参数、在线、慢基线、快基线、共模（锁定）、
+   跨弦（锁定）、持续判定、冷却、上电消隐、重新武装、首事件锁定、
+   当前项：、范围、全部回读、返回

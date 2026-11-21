@@ -1,0 +1,71 @@
+页面 power_wake — power_wake（唤醒与故障保护）；320×240。
+
+【后初始化事件】
+tm0.en=1
+// 唤醒屏幕后请求整机唤醒；重复请求不会重复标定/清空正在演奏的引擎。
+vpop=2
+vpextra=0
+vpowerseq=vpowerseq+1
+if(vpowerseq>65535)
+{
+  vpowerseq=0
+}
+vpseqlo=vpowerseq%256
+vpseqhi=vpowerseq/256
+vpcrc=28
+vpcrc=vpcrc^5
+vpcrc=vpcrc^1
+vpcrc=vpcrc^vpop
+vpcrc=vpcrc^vpseqlo
+vpcrc=vpcrc^vpseqhi
+vpcrc=vpcrc^vpextra
+printh AA 1C 05 01
+prints vpop,1
+prints vpseqlo,1
+prints vpseqhi,1
+prints vpextra,1
+prints vpcrc,1
+
+【定时器 tm0 事件；tim=100,en=1】
+vis b_retry,0
+if(vpowerstate==5)
+{
+  t_step.txt="正在恢复传感器，请稍候"
+}
+if(vpowerstate==3)
+{
+  t_step.txt="正在休眠，请稍候"
+}
+if(vpowerstate==6)
+{
+  t_step.txt="恢复未完成，请重试唤醒"
+  vis b_retry,1
+}
+if(vpowerstate==0&&vpowerresult==2)
+{
+  page main
+}
+
+【按钮 b_retry 弹起事件】
+vpop=2
+vpextra=0
+vpowerseq=vpowerseq+1
+if(vpowerseq>65535)
+{
+  vpowerseq=0
+}
+vpseqlo=vpowerseq%256
+vpseqhi=vpowerseq/256
+vpcrc=28
+vpcrc=vpcrc^5
+vpcrc=vpcrc^1
+vpcrc=vpcrc^vpop
+vpcrc=vpcrc^vpseqlo
+vpcrc=vpcrc^vpseqhi
+vpcrc=vpcrc^vpextra
+printh AA 1C 05 01
+prints vpop,1
+prints vpseqlo,1
+prints vpseqhi,1
+prints vpextra,1
+prints vpcrc,1

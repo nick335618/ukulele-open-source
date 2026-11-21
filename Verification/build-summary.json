@@ -1,0 +1,15 @@
+{
+  "UserCode": "00008D36",
+  "Fmax_MHz": 50.02,
+  "Setup": 0,
+  "Hold": 0,
+  "Logic": "22103/23040",
+  "CLS": "11432/11520",
+  "BSRAM": "56/56",
+  "DSP": "28/28",
+  "ROM_files_unchanged": 15,
+  "App": "3.19.12",
+  "App_tests": 80,
+  "ESP_flash_bytes": 1236321,
+  "ESP_RAM_bytes": 58640
+}

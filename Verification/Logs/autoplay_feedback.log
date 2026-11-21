@@ -1,0 +1,2 @@
+PASS actual automatic 0x28 four-note audio submission, correct MIDI/counters/source, 0x84 v2 CRC, physical replacement isolation
+D:\ukulele_handoff\OpenSource_20261121\Repository\Verification\Tests\autoplay_feedback_tb.sv:43: $finish called at 66880000 (1ps)

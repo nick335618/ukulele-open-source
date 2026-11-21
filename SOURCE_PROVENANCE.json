@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-21",
+  "code_source": "Uke_Playback_Fix_20261113",
+  "app": "3.19.12",
+  "fpga_usercode": "8D36",
+  "pcb_source": "ProPrj_Uke_2026-11-21.epro2",
+  "pcb_editor": "嘉立创EDA专业版 3.2.149.88089769",
+  "pcb_boards": [
+    "光电管发射端",
+    "光电管接收端",
+    "功放板",
+    "主板",
+    "电源板",
+    "电容品格"
+  ],
+  "mechanical_source": "Uke-V2.rar",
+  "mechanical_files": 217,
+  "video_source": "20261024201424_1dc938ec.mp4",
+  "verification": "Previous build results retained, no new hardware flash or test claimed",
+  "optional_test_fixture": "Chengdu MIDI is not redistributed; one test skips when absent"
+}

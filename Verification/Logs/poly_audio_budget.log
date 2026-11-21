@@ -1,0 +1,2 @@
+PASS 12 mixed-model voices, 512 samples in 1024-cycle frames, damping only in owner voice
+D:\ukulele_handoff\OpenSource_20261121\Repository\Verification\Tests\poly_audio_budget_tb.sv:39: $finish called at 10508060000 (1ps)

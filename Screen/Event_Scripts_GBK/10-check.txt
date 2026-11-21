@@ -1,0 +1,591 @@
+================================================================
+  Page 9 — check（光电管自检引导）  ★ 重写：判定改到屏侧
+  控件清单：docs/02-控件清单.md 第 10 节
+  算法：docs/01-协议设计.md §7
+================================================================
+
+★ 本页**不发任何 AA 0A 帧**。
+  固件里没有自检协议（screen_link.cpp / main_app.cpp 里没有 0x20），
+  新增它要动 FPGA + ESP32 + 屏三边；而现有数据通路已经够屏自己判定。
+  本页只发 `AA 0B` 要实时数据，然后自己数触发次数。零固件改动。
+
+★ 弦序（按屏幕行序，不是 1/2/3/4 弦序）
+    步骤 2  G  ← vdg0 / vp0   vev bit0 (值 1)   需要 ≥ 3 次
+    步骤 3  C  ← vdg2 / vp2   vev bit2 (值 4)   需要 ≥ 2 次
+    步骤 4  E  ← vdg1 / vp1   vev bit1 (值 2)   需要 ≥ 2 次
+    步骤 5  A  ← vdg3 / vp3   vev bit3 (值 8)   需要 ≥ 2 次
+    结果灯 t_r1~t_r4 依次显示 G / C / E / A
+
+--------------------------------------------------------
+【后初始化事件 Postinitialize Event】   ← 页面空白处 → 事件面板「后初始化事件」
+--------------------------------------------------------
+// 若从未开始过（vst=0），进页面直接开局；否则保留上次结果
+if(vst==0)
+{
+  vst=1
+  vstp=1
+  vtk=0
+  vsec=0
+  vrem=5
+  vprog=0
+  vcnt=0
+  vneed=0
+  vbit=1
+  vcd=0
+  vprev=0
+  vnoise=0
+  vr0=0
+  vr1=0
+  vr2=0
+  vr3=0
+}
+// 强制下一拍刷新全部文案
+vlstp=0
+vfpo=0
+vlcnt=0
+tm0.en=1
+
+
+--------------------------------------------------------
+【定时器 tm0 事件】  tim=100, en=1   ← 单击选中 tm0 控件 → 事件面板「定时器事件」
+--------------------------------------------------------
+// FPGA实际模式与串口心跳分开显示。
+if(vlink==0)
+{
+  vfpga=0
+  vev=0
+  vdet=0
+  vacc=0
+  vemit=0
+}
+if(vfpga==1)
+{
+  t_fpga.txt="FPGA：在线"
+  t_fpga.pco=2016
+}else
+{
+  t_fpga.txt="FPGA：离线"
+  t_fpga.pco=63488
+}
+t_pm.pco=65504
+if(vpmode==255)
+{
+  t_pm.txt="等待模式回读"
+}
+if(vpmode==0)
+{
+  t_pm.txt="实际：一拍锁定"
+  t_pm.pco=2016
+}
+if(vpmode==1)
+{
+  t_pm.txt="实际：四弦复音"
+  t_pm.pco=2016
+}
+// 模式状态显示请求结果；t_pm继续显示FPGA实际值。
+if(vfpga==1)
+{
+  if(voptype==7)
+  {
+    if(vopstatus==1)
+    {
+      t_fpga.txt="模式待确认"
+      t_fpga.pco=65504
+    }
+    if(vopstatus==3)
+    {
+      t_fpga.txt="模式失败"
+      t_fpga.pco=63488
+    }
+    if(vopstatus==4)
+    {
+      t_fpga.txt="模式超时"
+      t_fpga.pco=63488
+    }
+    if(vopstatus==6)
+    {
+      t_fpga.txt="设备忙"
+      t_fpga.pco=63488
+    }
+  }
+}
+if(vfpga==0)
+{
+  t_pm.txt="实际模式未知"
+  t_pm.pco=63488
+}
+
+// ===== ① 请求一帧实时数据（AA 0B，3 字节，不加 FF FF FF）=====
+printh AA 0B
+prints vseq,1
+vseq=vseq+1
+if(vseq>255)
+{
+  vseq=0
+}
+
+// ===== ② 步骤文案 + 本步参数（只在 vstp 变化时刷一次）=====
+if(vstp!=vlstp)
+{
+  vlstp=vstp
+
+  // 步骤编号
+  covx vstp,t_tmp.txt,0,0
+  t_step.txt="步骤 "
+  t_step.txt=t_step.txt+t_tmp.txt
+  t_step.txt=t_step.txt+" / 5"
+
+  if(vstp==1)
+  {
+    t_hint1.txt="请拿好尤克里里"
+    t_hint2.txt="以演奏姿势持琴，静置不动"
+    vst=1
+    vneed=0
+    vbit=1
+  }
+  if(vstp==2)
+  {
+    t_hint1.txt="请拨 G 弦"
+    t_hint2.txt="5 秒内拨动 3 到 4 次"
+    vst=2
+    vneed=3
+    vbit=1
+  }
+  if(vstp==3)
+  {
+    t_hint1.txt="请拨 C 弦"
+    t_hint2.txt="5 秒内自由拨动"
+    vst=2
+    vneed=2
+    vbit=4
+  }
+  if(vstp==4)
+  {
+    t_hint1.txt="请拨 E 弦"
+    t_hint2.txt="5 秒内自由拨动"
+    vst=2
+    vneed=2
+    vbit=2
+  }
+  if(vstp==5)
+  {
+    t_hint1.txt="请拨 A 弦"
+    t_hint2.txt="5 秒内自由拨动"
+    vst=2
+    vneed=2
+    vbit=8
+  }
+}
+
+// ===== ③ 触发计数（上升沿 + 去抖 200ms）=====
+//
+//   vev 是"最近 100ms 内触发过"的【锁存】值，同一根弦可能连续两帧都为 1，
+//   直接数"当前为 1"会把一次拨弦数成 2 次，所以必须做上升沿检测。
+//
+//   vusev=1 → 用 vev 位图判（FPGA 的判定结果，最准）
+//             在 Program.s 里改。改 ESP32 加上 vev 后改成 1。
+if(vst<3)
+{
+  // ---- 步骤 1：采环境基线，数噪声拍数 ----
+  if(vst==1)
+  {
+    vt3=0
+    if(vdg0>vp0)
+    {
+      vt3=1
+    }
+    if(vdg1>vp1)
+    {
+      vt3=1
+    }
+    if(vdg2>vp2)
+    {
+      vt3=1
+    }
+    if(vdg3>vp3)
+    {
+      vt3=1
+    }
+
+    if(vfpga==1)
+    {
+      if(vev>0)
+      {
+        vnoise=vnoise+1
+      }
+    }
+
+
+    if(vnoise>3)
+    {
+      t_hint2.txt="环境光偏强"
+    }
+  }
+
+  // ---- 步骤 2~5：数目标弦的触发次数 ----
+  if(vst==2)
+  {
+    // 先取当前弦的强度与阈值（顺序别改：G/C/E/A → vdg0/2/1/3）
+    if(vbit==1)
+    {
+      vraw=vdg0
+      vthr=vp0
+    }
+    if(vbit==4)
+    {
+      vraw=vdg2
+      vthr=vp2
+    }
+    if(vbit==2)
+    {
+      vraw=vdg1
+      vthr=vp1
+    }
+    if(vbit==8)
+    {
+      vraw=vdg3
+      vthr=vp3
+    }
+
+    vcur=vev/vbit%2
+    
+
+    // 上升沿：vnew==1 才是"这一拍新拨了一次"
+    vnew=vcur-vprev
+    vprev=vcur
+    if(vnew==1)
+    {
+      if(vcd==0)
+      {
+        vcnt=vcnt+1
+        vcd=2
+      }
+    }
+    if(vcd>0)
+    {
+      vcd=vcd-1
+    }
+  }
+
+  // ---- 计数显示 ----
+  if(vcnt!=vlcnt)
+  {
+    vlcnt=vcnt
+    covx vcnt,t_tmp.txt,0,0
+    t_cnt.txt="已 "
+    t_cnt.txt=t_cnt.txt+t_tmp.txt
+    t_cnt.txt=t_cnt.txt+" 次"
+  }
+}
+
+// ===== ④ 倒计时与步骤推进 =====
+//    tm0.tim=100 => 5 秒 = 50 拍
+//    ★ 不要写 if(vtk%10==0)：不支持括号，if 里也不能有运算
+if(vst<3)
+{
+  vtk=vtk+1
+  vsec=vtk/10
+  vrem=5-vsec
+  vprog=vtk*2
+
+  if(vtk>=50)
+  {
+    // 判定刚结束的这一步（步骤 1 不判定）
+    if(vstp==2)
+    {
+      if(vcnt>=vneed)
+      {
+        vr0=1
+      }else
+      {
+        vr0=2
+      }
+    }
+    if(vstp==3)
+    {
+      if(vcnt>=vneed)
+      {
+        vr1=1
+      }else
+      {
+        vr1=2
+      }
+    }
+    if(vstp==4)
+    {
+      if(vcnt>=vneed)
+      {
+        vr2=1
+      }else
+      {
+        vr2=2
+      }
+    }
+    if(vstp==5)
+    {
+      if(vcnt>=vneed)
+      {
+        vr3=1
+      }else
+      {
+        vr3=2
+      }
+      vst=3
+      vtk=0
+    }
+    // 还没到最后一步就进下一步
+    if(vstp<5)
+    {
+      vstp=vstp+1
+      vtk=0
+      vsec=0
+      vrem=5
+      vprog=0
+    }
+    vcnt=0
+    vcd=0
+    vprev=0
+  }
+}
+
+// ===== ⑤ 汇总判定（vst=3，等 5 拍 = 0.5 秒）=====
+if(vst==3)
+{
+  vrem=0
+  vprog=100
+  vtk=vtk+1
+  if(vtk>=5)
+  {
+    // 四弦全通过时 vr0..vr3 全是 1，和 = 4
+    vt0=vr0+vr1+vr2+vr3
+    if(vt0==4)
+    {
+      vst=4
+    }else
+    {
+      vst=5
+    }
+    tm0.en=0
+  }
+}
+
+// ===== ⑥ 倒计时显示 =====
+if(vst<3)
+{
+  n_cnt.val=vrem
+  j0.val=vprog
+}else
+{
+  n_cnt.val=0
+  j0.val=100
+}
+
+// ===== ⑦ 状态 / 结果灯 / 按钮文案 =====
+//    指纹 = 16*vst + 8*vr3 + 4*vr2 + 2*vr1 + vr0
+//    ★ 左到右求值，乘号必须在前面，写成 vr0+2*vr1 会变成 (vr0+2)*vr1
+vfp=16*vst+8*vr3+4*vr2+2*vr1+vr0
+if(vfp!=vfpo)
+{
+  vfpo=vfp
+
+  // ---- 状态行 ----
+  if(vst==0)
+  {
+    t_state.txt="准备中"
+    t_state.pco=65504
+  }
+  if(vst==1)
+  {
+    t_state.txt="进行中"
+    t_state.pco=65504
+  }
+  if(vst==2)
+  {
+    t_state.txt="进行中"
+    t_state.pco=65504
+  }
+  if(vst==3)
+  {
+    t_state.txt="等待结果"
+    t_state.pco=65504
+  }
+  if(vst==4)
+  {
+    t_state.txt="自检成功"
+    t_state.pco=2016
+    t_hint1.txt="四弦全部正常"
+    t_hint2.txt="可以开始演奏"
+  }
+  if(vst==5)
+  {
+    t_state.txt="自检失败"
+    t_state.pco=63488
+    t_hint1.txt="有弦未通过"
+    t_hint2.txt="请重新拨弦或调灵敏度"
+  }
+
+  // ---- 结果灯 1：G 弦 ----
+  if(vr0==0)
+  {
+    t_r1.txt="G 弦"
+    t_r1.bco=22979
+    t_r1.pco=33808
+  }
+  if(vr0==1)
+  {
+    t_r1.txt="G 弦 通过"
+    t_r1.bco=2016
+    t_r1.pco=0
+  }
+  if(vr0==2)
+  {
+    t_r1.txt="G 弦 未过"
+    t_r1.bco=63488
+    t_r1.pco=65535
+  }
+
+  // ---- 结果灯 2：C 弦 ----
+  if(vr1==0)
+  {
+    t_r2.txt="C 弦"
+    t_r2.bco=22979
+    t_r2.pco=33808
+  }
+  if(vr1==1)
+  {
+    t_r2.txt="C 弦 通过"
+    t_r2.bco=2016
+    t_r2.pco=0
+  }
+  if(vr1==2)
+  {
+    t_r2.txt="C 弦 未过"
+    t_r2.bco=63488
+    t_r2.pco=65535
+  }
+
+  // ---- 结果灯 3：E 弦 ----
+  if(vr2==0)
+  {
+    t_r3.txt="E 弦"
+    t_r3.bco=22979
+    t_r3.pco=33808
+  }
+  if(vr2==1)
+  {
+    t_r3.txt="E 弦 通过"
+    t_r3.bco=2016
+    t_r3.pco=0
+  }
+  if(vr2==2)
+  {
+    t_r3.txt="E 弦 未过"
+    t_r3.bco=63488
+    t_r3.pco=65535
+  }
+
+  // ---- 结果灯 4：A 弦 ----
+  if(vr3==0)
+  {
+    t_r4.txt="A 弦"
+    t_r4.bco=22979
+    t_r4.pco=33808
+  }
+  if(vr3==1)
+  {
+    t_r4.txt="A 弦 通过"
+    t_r4.bco=2016
+    t_r4.pco=0
+  }
+  if(vr3==2)
+  {
+    t_r4.txt="A 弦 未过"
+    t_r4.bco=63488
+    t_r4.pco=65535
+  }
+
+  // ---- 取消 / 重来 按钮 ----
+  if(vst>=4)
+  {
+    b_cancel.txt="重新自检"
+    b_cancel.bco=56784
+  }else
+  {
+    b_cancel.txt="取消自检"
+    b_cancel.bco=22979
+  }
+}
+
+
+--------------------------------------------------------
+【按钮 b_cancel 弹起事件】 codesup
+--------------------------------------------------------
+// 跑完以后这个按钮变成"重新自检"；没跑完就是"取消"
+if(vst>=4)
+{
+  vst=1
+  vstp=1
+  vtk=0
+  vsec=0
+  vrem=5
+  vprog=0
+  vcnt=0
+  vneed=0
+  vbit=1
+  vcd=0
+  vprev=0
+  vnoise=0
+  vr0=0
+  vr1=0
+  vr2=0
+  vr3=0
+  vlstp=0
+  vfpo=0
+  vlcnt=0
+  tm0.en=1
+}else
+{
+  vst=0
+  tm0.en=0
+  page opt
+}
+
+
+--------------------------------------------------------
+【按钮 b_back 弹起事件】 codesup
+--------------------------------------------------------
+tm0.en=0
+page opt
+
+
+================================================================
+  说明
+================================================================
+
+1. ★★ 判定在屏侧，不下位机。
+   固件没有任何自检命令（核对过 screen_link.cpp 和 main_app.cpp）。
+   屏自己数"这 5 秒里这根弦触发了几次"，达到次数就算通过。
+
+2. 自检固定使用实际送入音频的vev事件，超阈值不等于发声。
+
+3. ★ 上升沿检测是必须的。vev / 强度都是 100ms 锁存值，
+   一次拨弦会连续 2~3 拍为真，直接数"当前为真"会把一次数成三次。
+
+4. ★ `covx` 是数值转文本的唯一办法。
+   `t_cnt.txt="已 "+vcnt` 这种写法编译能过但显示是空的（官方 p.844 明确列为错误）。
+   必须先 `covx vcnt,t_tmp.txt,0,0` 转到屏外的 `t_tmp`，再拼字符串。
+
+5. ★ 乘号要写在前面：`16*vst+8*vr3+...`
+   TJC 没有运算符优先级，一律左到右。`vr0+2*vr1` 会被算成 `(vr0+2)*vr1`。
+
+6. 步骤 1 会数环境噪声（`vnoise`）。50 拍里有超过 3 拍检测到触发，
+   就把副提示改成"环境光偏强"提醒用户，但不阻断流程。
+
+7. 进度条 `j0` 的 `maxval=100`，`vprog=vtk*2` => 50 拍正好走满 100。
+
+8. 本页需要的中文（记得进字库）：
+   光电管自检、步骤、请拿好尤克里里、以演奏姿势持琴，静置不动、
+   请拨、弦、秒内拨动、到、次、已、环境光偏强、
+   准备中、进行中、等待结果、自检成功、自检失败、
+   四弦全部正常、可以开始演奏、有弦未通过、请重新拨弦或调灵敏度、
+   通过、未过、取消自检、重新自检、返回

@@ -1,0 +1,2 @@
+PASS 608 single-string plucks, all 72 frets, open strings, four timbres, lock/poly, unequal-fret 2/3/4 chords
+D:\ukulele_handoff\OpenSource_20261121\Repository\Verification\Tests\string_routing_tb.sv:67: $finish called at 521120000 (1ps)

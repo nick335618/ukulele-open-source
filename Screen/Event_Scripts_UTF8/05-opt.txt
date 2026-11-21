@@ -1,0 +1,409 @@
+================================================================
+  Page 4 — opt（四弦实时状态）  ★ 重做
+  控件清单：docs/02-控件清单.md 第 5 节
+  协议：docs/01-协议设计.md §1.3（AA 0B）、§4（通道映射）
+================================================================
+
+本页是光电调节的中枢：显示四弦实时状态 + 通往 4 个子页的入口。
+
+★ 通道映射（第 2/3 行和通常想的不一样，别改）
+    第 1 行 G ← ADC0 ← vra0 / vdg0 / vp0    vev bit0 (值 1)
+    第 2 行 C ← ADC2 ← vra2 / vdg2 / vp2    vev bit2 (值 4)
+    第 3 行 E ← ADC1 ← vra1 / vdg1 / vp1    vev bit1 (值 2)
+    第 4 行 A ← ADC3 ← vra3 / vdg3 / vp3    vev bit3 (值 8)
+
+--------------------------------------------------------
+【后初始化事件 Postinitialize Event】   ← 页面空白处 → 事件面板「后初始化事件」
+--------------------------------------------------------
+// 先把上次的读数清掉，避免"离线冻结"逻辑一进来就误判
+// 进页面先把心跳同步一次，别第一拍就误判离线
+vbeatLast=vbeat
+vbeatAge=0
+tm0.en=1
+
+
+--------------------------------------------------------
+【定时器 tm0 事件】  tim=100, en=1   ← 单击选中 tm0 控件 → 事件面板「定时器事件」
+--------------------------------------------------------
+// FPGA实际模式与串口心跳分开显示。
+if(vlink==0)
+{
+  vfpga=0
+  vev=0
+  vdet=0
+  vacc=0
+  vemit=0
+}
+if(vfpga==1)
+{
+  t_fpga.txt="FPGA：在线"
+  t_fpga.pco=2016
+}else
+{
+  t_fpga.txt="FPGA：离线"
+  t_fpga.pco=63488
+}
+t_pm.pco=65504
+if(vpmode==255)
+{
+  t_pm.txt="等待模式回读"
+}
+if(vpmode==0)
+{
+  t_pm.txt="实际：一拍锁定"
+  t_pm.pco=2016
+}
+if(vpmode==1)
+{
+  t_pm.txt="实际：四弦复音"
+  t_pm.pco=2016
+}
+// 模式状态显示请求结果；t_pm继续显示FPGA实际值。
+if(vfpga==1)
+{
+  if(voptype==7)
+  {
+    if(vopstatus==1)
+    {
+      t_fpga.txt="模式待确认"
+      t_fpga.pco=65504
+    }
+    if(vopstatus==3)
+    {
+      t_fpga.txt="模式失败"
+      t_fpga.pco=63488
+    }
+    if(vopstatus==4)
+    {
+      t_fpga.txt="模式超时"
+      t_fpga.pco=63488
+    }
+    if(vopstatus==6)
+    {
+      t_fpga.txt="设备忙"
+      t_fpga.pco=63488
+    }
+  }
+}
+if(vfpga==0)
+{
+  t_pm.txt="实际模式未知"
+  t_pm.pco=63488
+}
+b_lock.bco=22979
+b_lock.pco=65535
+b_poly.bco=22979
+b_poly.pco=65535
+if(vfpga==1)
+{
+  if(vpmode==0)
+  {
+    b_lock.bco=56784
+    b_lock.pco=0
+  }
+  if(vpmode==1)
+  {
+    b_poly.bco=56784
+    b_poly.pco=0
+  }
+}
+covx vdet,t_tmp.txt,0,0
+t_diag.txt="检"
+t_diag.txt=t_diag.txt+t_tmp.txt
+t_diag.txt=t_diag.txt+"/收"
+covx vacc,t_tmp.txt,0,0
+t_diag.txt=t_diag.txt+t_tmp.txt
+t_diag.txt=t_diag.txt+"/声"
+covx vemit,t_tmp.txt,0,0
+t_diag.txt=t_diag.txt+t_tmp.txt
+
+// ===== ① 请求一帧实时数据（AA 0B 是 3 字节）=====
+printh AA 0B
+prints vseq,1
+vseq=vseq+1
+if(vseq>255)
+{
+  vseq=0
+}
+
+// ===== ② 链路判断（和 main 页同一套）=====
+// ESP32 每收到一次 AA 0B 就把 vbeat 写成新值
+if(vbeat!=vbeatLast)
+{
+  vbeatLast=vbeat
+  vbeatAge=0
+  vlink=1
+}else
+{
+  vbeatAge=vbeatAge+1
+  if(vbeatAge>15)
+  {
+    vlink=0
+  }
+}
+
+if(vlink==1)
+{
+  o_lk.txt="串口通"
+  o_lk.bco=22979
+  o_lk.pco=2016
+}else
+{
+  o_lk.txt="串口断"
+  o_lk.bco=63488
+  o_lk.pco=0
+}
+
+// ===== ③ 刷新四行数值 =====
+// FPGA断开时清零原始读数和变化量，保留最后已知参数并标明离线。
+if(vfpga==1)
+{
+  // 第 1 行 G
+  o_a1.val=vra0
+  o_d1.val=vdg0
+  o_t1.val=vp0
+  // 第 2 行 C
+  o_a2.val=vra2
+  o_d2.val=vdg2
+  o_t2.val=vp2
+  // 第 3 行 E
+  o_a3.val=vra1
+  o_d3.val=vdg1
+  o_t3.val=vp1
+  // 第 4 行 A
+  o_a4.val=vra3
+  o_d4.val=vdg3
+  o_t4.val=vp3
+}else
+{
+  o_a1.val=0
+  o_a2.val=0
+  o_a3.val=0
+  o_a4.val=0
+  o_d1.val=0
+  o_d2.val=0
+  o_d3.val=0
+  o_d4.val=0
+}
+
+// ===== ④ 刷新四行触发指示 =====
+//   未触发：深木底 22979 + 灰字 33808
+//   触发中：绿底 2016 + 黑字 0
+//
+//   ★ 位值不是 1/2/4/8 顺序，是 1(G)/4(C)/2(E)/8(A)
+//
+
+// 第 1 行 G —— 实际音频事件 bit0
+vt2=vev%2
+
+if(vt2==1)
+{
+  o_f1.bco=2016
+  o_f1.pco=0
+}else
+{
+  o_f1.bco=22979
+  o_f1.pco=33808
+}
+
+// 第 2 行 C —— 实际音频事件 bit2（值4）
+vt2=vev/4%2
+
+if(vt2==1)
+{
+  o_f2.bco=2016
+  o_f2.pco=0
+}else
+{
+  o_f2.bco=22979
+  o_f2.pco=33808
+}
+
+// 第 3 行 E —— 实际音频事件 bit1（值2）
+vt2=vev/2%2
+
+if(vt2==1)
+{
+  o_f3.bco=2016
+  o_f3.pco=0
+}else
+{
+  o_f3.bco=22979
+  o_f3.pco=33808
+}
+
+// 第 4 行 A —— 实际音频事件 bit3（值8）
+vt2=vev/8%2
+
+if(vt2==1)
+{
+  o_f4.bco=2016
+  o_f4.pco=0
+}else
+{
+  o_f4.bco=22979
+  o_f4.pco=33808
+}
+
+
+--------------------------------------------------------
+【按钮 o_check 弹起事件】 codesup —— ★ 开始自检 ★
+--------------------------------------------------------
+// 复位自检状态机（真正的判定在 check 页做，这里只负责开局）
+vst=1
+vstp=1
+vtk=0
+vsec=0
+vrem=5
+vprog=0
+vcnt=0
+vcd=0
+vprev=0
+vbit=1
+vnoise=0
+vr0=0
+vr1=0
+vr2=0
+vr3=0
+
+// ★ 不要在这里发任何 AA 0A 帧 ——
+//   固件里没有自检协议，自检完全由屏侧判定，见 docs/01 §7。
+page check
+
+
+--------------------------------------------------------
+【按钮 o_gain 弹起事件】 codesup —— 四弦独立调节
+--------------------------------------------------------
+page gain
+
+
+--------------------------------------------------------
+【按钮 o_preset 弹起事件】 codesup —— 快速预设
+--------------------------------------------------------
+page preset
+
+
+--------------------------------------------------------
+【按钮 o_adv 弹起事件】 codesup —— 高级参数
+--------------------------------------------------------
+page adv
+
+
+--------------------------------------------------------
+【按钮 o_save 弹起事件】 codesup —— 保存与恢复
+--------------------------------------------------------
+page save
+
+
+--------------------------------------------------------
+【按钮 o_back 弹起事件】 codesup
+--------------------------------------------------------
+page main
+
+
+================================================================
+  说明
+================================================================
+
+1. ★ AA 0B 帧（3 字节）：
+      printh AA 0B
+      prints vseq,1
+   固件收到后把最近一帧 0x84 遥测写成 8 条变量赋值回传：
+      vra0=... vra1=... vra2=... vra3=...
+      vdg0=... vdg1=... vdg2=... vdg3=...
+   注意 **vev由FPGA实际音频提交事件生成**（见 docs/01 §6 第 2 项，改 ESP32 只需 2 行）。
+   加之前走 **`vusev=0` 的"强度 > 阈值"兜底判据**（第 ④ 步里已经写了），
+   触发指示照样会亮，只是不如 FPGA 的锁定结果准。
+   加上 `vev` 后把 `00-程序s.txt` 的 `int vusev=0` 改成 `1` 即可。
+
+1b. ★ 在线判断看的是心跳 `vbeat`，不是读数有没有变。
+   固件还没写 `vbeat` 时，`o_lk` 会一直显示「离线」—— 这是预期的，
+   不代表通信断了。详见 docs/06-固件对接清单.md §1.2。
+
+2. 触发指示靠改【背景色 bco】实现，不需要图片素材。
+   ★ 前提：o_f1~o_f4 的 `sta` 属性必须是【纯色】。
+     若选成"图片 / 裁剪"，bco 会被背景图盖住，改颜色无效。
+
+3. `tim=100` 是必须的：vev 的锁存窗口就是 100 ms，
+   轮询慢于它就会漏掉整次拨弦。
+
+4. 第 ③ 步用 `if(vlink==1)` 把刷新包起来，是为了**失联时冻结显示**。
+   否则链路断了以后，屏上会一直显示断链前的最后一组数，
+   用户会以为是实时值 —— 这是最误导人的假象。
+
+5. 本页需要显示的中文：光电调节、在线、离线、弦、读数、强度、阈值、
+   触发、弦调节、预设、高级、保存、自检、返回
+
+--------------------------------------------------------
+【按钮 b_lock 弹起事件】
+--------------------------------------------------------
+vopr=7
+voch=0
+vval=0
+// 新协议1A：序号在校验范围内，独立于实时刷新心跳序号。
+vopseq=vopseq+1
+if(vopseq>127)
+{
+  vopseq=0
+}
+vreqseq=vopseq
+vlo=vval%256
+vmid=vval/256
+vmid=vmid%256
+vhi=vval/65536
+vhi=vhi%256
+vcrc=26
+vcrc=vcrc^6
+vcrc=vcrc^vopr
+vcrc=vcrc^voch
+vcrc=vcrc^vlo
+vcrc=vcrc^vmid
+vcrc=vcrc^vhi
+vcrc=vcrc^vreqseq
+vopstatus=1
+vopage=0
+printh AA 1A 06
+prints vopr,1
+prints voch,1
+prints vlo,1
+prints vmid,1
+prints vhi,1
+prints vreqseq,1
+prints vcrc,1
+
+--------------------------------------------------------
+【按钮 b_poly 弹起事件】
+--------------------------------------------------------
+vopr=7
+voch=0
+vval=1
+// 新协议1A：序号在校验范围内，独立于实时刷新心跳序号。
+vopseq=vopseq+1
+if(vopseq>127)
+{
+  vopseq=0
+}
+vreqseq=vopseq
+vlo=vval%256
+vmid=vval/256
+vmid=vmid%256
+vhi=vval/65536
+vhi=vhi%256
+vcrc=26
+vcrc=vcrc^6
+vcrc=vcrc^vopr
+vcrc=vcrc^voch
+vcrc=vcrc^vlo
+vcrc=vcrc^vmid
+vcrc=vcrc^vhi
+vcrc=vcrc^vreqseq
+vopstatus=1
+vopage=0
+printh AA 1A 06
+prints vopr,1
+prints voch,1
+prints vlo,1
+prints vmid,1
+prints vhi,1
+prints vreqseq,1
+prints vcrc,1

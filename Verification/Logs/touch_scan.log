@@ -1,0 +1,2 @@
+PASS actual synchronous CDC RAM + shared LED mapping ROM, all 72 frets, stable hold, release hysteresis, one-scan noise, highest fret, invalid ADC
+D:\ukulele_handoff\OpenSource_20261121\Repository\Verification\Tests\touch_scan_tb.sv:59: $finish called at 16744580000 (1ps)
