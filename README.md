@@ -51,7 +51,7 @@ flowchart LR
 | 打开嘉立创PCB工程 | [最新版epro2工程](Hardware/Electrical/JLCEDA/ProPrj_Uke_2026-11-21.epro2) |
 | 查看原理图／PCB缩略图与物料索引 | [电路板导航](Hardware/Electrical/README.md) |
 | 下载3D装配和打印相关零件 | [机械设计导航](Hardware/Mechanical/README.md)、[原始3D包](https://github.com/nick335618/ukulele-open-source/releases/download/open-source-2026-11-21/Uke-V2.rar) |
-| 购买电池／扬声器 | [用户指定的采购链接](Docs/Procurement.md) |
+| 购买FPGA／ESP32开发板、电池和扬声器 | [用户指定的采购链接](Docs/Procurement.md) |
 | 从源码复现 | [编译与烧录](Docs/BUILDING.md) |
 | 确认版本、已知问题和验证边界 | [发布说明](Docs/RELEASE_NOTES.md)、[验证导航](Verification/README.md) |
 
